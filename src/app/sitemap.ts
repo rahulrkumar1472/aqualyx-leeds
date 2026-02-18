@@ -1,0 +1,69 @@
+import type { MetadataRoute } from "next";
+import { nearLeedsAreas } from "@/content/locations";
+import { siteConfig } from "@/content/site";
+import { getAllBlogPosts } from "@/lib/blog";
+
+const staticPaths = [
+  "/",
+  "/aqualyx-leeds",
+  "/fat-dissolving-injections-leeds",
+  "/aqualyx-double-chin-leeds",
+  "/aqualyx-stomach-leeds",
+  "/aqualyx-love-handles-leeds",
+  "/aqualyx-aftercare",
+  "/aqualyx-side-effects",
+  "/aqualyx-vs-lemon-bottle",
+  "/aqualyx-vs-fat-freezing",
+  "/prices",
+  "/treatments",
+  "/treatments/fat-dissolving-injections",
+  "/treatments/aqualyx",
+  "/treatments/lemon-bottle",
+  "/treatments/non-invasive-fat-reduction",
+  "/treatments/fat-freezing",
+  "/treatments/ultrasound-cavitation",
+  "/pricing",
+  "/pricing/fat-dissolving",
+  "/pricing/fat-freezing",
+  "/pricing/cavitation",
+  "/results",
+  "/faqs",
+  "/about",
+  "/contact",
+  "/book",
+  "/locations",
+  "/locations/leeds",
+  "/locations/near-leeds",
+  "/privacy",
+  "/terms",
+  "/medical-disclaimer",
+  "/cookie-policy",
+  "/blog"
+];
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const blogPosts = await getAllBlogPosts();
+
+  const staticEntries = staticPaths.map((path) => ({
+    url: `${siteConfig.siteUrl}${path}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: path === "/" ? 1 : 0.7
+  }));
+
+  const locationEntries = nearLeedsAreas.map((area) => ({
+    url: `${siteConfig.siteUrl}/locations/areas/${area.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.7
+  }));
+
+  const blogEntries = blogPosts.map((post) => ({
+    url: `${siteConfig.siteUrl}/blog/${post.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6
+  }));
+
+  return [...staticEntries, ...locationEntries, ...blogEntries];
+}

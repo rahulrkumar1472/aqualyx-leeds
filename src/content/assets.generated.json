@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-02-18T21:48:32.127Z",
+  "sourceDir": "/aqualyxleeds",
+  "brand": {
+    "logo": "/brand/logo.svg",
+    "og": "/brand/og.svg"
+  },
+  "hero": [
+    "/images/hero/hero-1.jpg",
+    "/images/hero/hero-2.jpg",
+    "/images/hero/hero-3.jpg",
+    "/images/hero/hero-4.jpg"
+  ],
+  "treatments": {
+    "aqualyx": [
+      "/images/treatments/aqualyx/aqualyx-1.jpg",
+      "/images/treatments/aqualyx/aqualyx-2.jpg",
+      "/images/treatments/aqualyx/aqualyx-3.jpg",
+      "/images/treatments/aqualyx/aqualyx-4.jpg",
+      "/images/treatments/aqualyx/aqualyx-5.jpg"
+    ],
+    "lemonBottle": [
+      "/images/treatments/lemon-bottle/lemon-bottle-1.jpg",
+      "/images/treatments/lemon-bottle/lemon-bottle-2.jpg",
+      "/images/treatments/lemon-bottle/lemon-bottle-3.jpg",
+      "/images/treatments/lemon-bottle/lemon-bottle-4.jpg"
+    ],
+    "fatFreezing": [
+      "/images/treatments/fat-freezing/fat-freezing-1.jpg",
+      "/images/treatments/fat-freezing/fat-freezing-2.jpg",
+      "/images/treatments/fat-freezing/fat-freezing-3.jpg",
+      "/images/treatments/fat-freezing/fat-freezing-4.jpg",
+      "/images/treatments/fat-freezing/fat-freezing-5.jpg"
+    ],
+    "cavitation": [
+      "/images/treatments/cavitation/cavitation-1.jpg",
+      "/images/treatments/cavitation/cavitation-2.jpg",
+      "/images/treatments/cavitation/cavitation-3.jpg",
+      "/images/treatments/cavitation/cavitation-4.jpg",
+      "/images/treatments/cavitation/cavitation-5.jpg"
+    ]
+  },
+  "clinic": [
+    "/images/clinic/clinic-1.jpg",
+    "/images/clinic/clinic-2.webp",
+    "/images/clinic/clinic-3.webp",
+    "/images/clinic/clinic-4.webp",
+    "/images/clinic/clinic-5.webp"
+  ],
+  "results": [
+    "/images/results/result-1.jpg",
+    "/images/results/result-2.jpg",
+    "/images/results/result-3.jpg",
+    "/images/results/result-4.jpg",
+    "/images/results/result-5.jpg",
+    "/images/results/result-6.webp",
+    "/images/results/result-7.webp",
+    "/images/results/result-8.webp",
+    "/images/results/result-9.webp",
+    "/images/results/result-10.webp"
+  ]
+}

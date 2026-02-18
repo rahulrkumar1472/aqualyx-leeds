@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 205 55% 98%;
+  --foreground: 218 27% 18%;
+  --card: 0 0% 100%;
+  --card-foreground: 218 27% 18%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 218 27% 18%;
+  --primary: 201 86% 64%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 216 33% 22%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 204 44% 95%;
+  --muted-foreground: 215 15% 35%;
+  --accent: 203 71% 93%;
+  --accent-foreground: 218 27% 18%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+  --success: 150 60% 34%;
+  --success-foreground: 0 0% 98%;
+  --border: 206 34% 86%;
+  --input: 206 34% 86%;
+  --ring: 201 86% 64%;
+  --radius: 1.25rem;
+}
+
+* {
+  @apply border-border;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  font-family: "Nunito Sans", "Avenir Next", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(0.96rem, 0.15vw + 0.92rem, 1.045rem);
+  background-image:
+    radial-gradient(circle at 100% 0%, hsl(var(--primary) / 0.1), transparent 44%),
+    radial-gradient(circle at 0% 100%, hsl(var(--accent) / 0.38), transparent 56%);
+  line-height: 1.62;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Space Grotesk", "Avenir Next", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  @apply text-balance text-[2.45rem] font-semibold leading-[1.04] tracking-[-0.03em] md:text-[4.15rem];
+}
+
+h2 {
+  @apply text-balance text-[1.95rem] font-semibold leading-[1.1] tracking-[-0.024em] md:text-[2.9rem];
+}
+
+h3 {
+  @apply text-[1.55rem] font-semibold leading-[1.16] tracking-[-0.015em];
+}
+
+p {
+  max-width: 65ch;
+}
+
+main {
+  @apply min-h-screen;
+}
+
+.bg-hero-mesh {
+  background:
+    radial-gradient(circle at 18% 18%, hsl(var(--primary) / 0.35), transparent 46%),
+    radial-gradient(circle at 85% 8%, hsl(var(--secondary) / 0.12), transparent 42%),
+    radial-gradient(circle at 50% 88%, hsl(var(--accent) / 0.72), transparent 45%),
+    linear-gradient(180deg, hsl(var(--background)) 0%, hsl(var(--background)) 100%);
+}
+
+.shadow-soft {
+  box-shadow: 0 14px 34px hsl(var(--secondary) / 0.08);
+}
+
+.lead {
+  @apply max-w-[65ch] text-base leading-relaxed text-muted-foreground md:text-[1.07rem];
+}
+
+.eyebrow {
+  @apply text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-primary/80;
+}
+
+@keyframes caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  60%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-caret {
+  animation: caret-blink 1.35s steps(1, end) infinite;
+}

@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  BOOKED
+  CLOSED
+}
+
+model BookingRequest {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  treatment String
+  area      String?
+  date      String
+  time      String
+  name      String
+  phone     String
+  email     String
+  notes     String?
+  source    String
+}
+
+model LeadCapture {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  name      String
+  phone     String
+  email     String
+  interest  String
+  source    String
+}
+
+model Lead {
+  id                     String     @id @default(cuid())
+  createdAt              DateTime   @default(now())
+  firstName              String
+  lastName               String
+  email                  String
+  phone                  String
+  preferredContactMethod String
+  treatmentInterest      String
+  targetArea             String
+  preferredDate          String?
+  preferredTime          String?
+  message                String?
+  consent                Boolean
+  marketingOptIn         Boolean    @default(false)
+  status                 LeadStatus @default(NEW)
+  source                 String     @default("website")
+  pagePath               String?
+  utmSource              String?
+  utmMedium              String?
+  utmCampaign            String?
+  utmTerm                String?
+  utmContent             String?
+}
+
+model RateLimit {
+  id          String   @id @default(cuid())
+  ip          String
+  windowStart DateTime
+  count       Int      @default(1)
+
+  @@unique([ip, windowStart], name: "ip_windowStart")
+}
