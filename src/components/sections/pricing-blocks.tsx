@@ -13,9 +13,9 @@ export function FatDissolvingPricingBlock() {
           <CardTitle>Price per ml: {pricingConfig.fatDissolving.pricePerMl}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4 text-sm text-muted-foreground">
-          <div className="overflow-hidden rounded-2xl border border-border/70 bg-muted/35">
+          <div className="max-h-[330px] overflow-auto rounded-2xl border border-border/70 bg-muted/35">
             <table className="w-full text-left">
-              <thead className="bg-muted/55 text-xs uppercase tracking-wide">
+              <thead className="sticky top-0 bg-muted/85 text-xs uppercase tracking-wide backdrop-blur">
                 <tr>
                   <th className="px-3 py-2">Area</th>
                   <th className="px-3 py-2">Typical ml range</th>
@@ -31,7 +31,15 @@ export function FatDissolvingPricingBlock() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs">{pricingConfig.fatDissolving.disclaimer}</p>
+          <p className="text-xs">{pricingConfig.fatDissolving.disclaimer}. Consultation-led, clinically guided, Leeds clinic (LS11).</p>
+          <details className="rounded-xl border border-border/70 bg-card/80 p-3">
+            <summary className="cursor-pointer text-sm font-semibold text-foreground">What affects cost?</summary>
+            <div className="mt-2 space-y-1.5 text-xs text-muted-foreground">
+              <p>• Area size and treatment complexity.</p>
+              <p>• Estimated ml range based on consultation findings.</p>
+              <p>• Whether staged sessions are recommended.</p>
+            </div>
+          </details>
           <div className="flex flex-wrap gap-2">
             <Button asChild variant="outline">
               <Link href="/contact">Get a Quote</Link>
@@ -64,6 +72,11 @@ export function FatDissolvingPricingBlock() {
           <p className="inline-flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-primary" /> WhatsApp support for quick questions
           </p>
+          <div className="rounded-xl border border-primary/20 bg-primary/5 p-3 text-xs">
+            <p className="font-semibold text-foreground">Quick estimate</p>
+            Most chin consultations often discuss lower ml ranges than larger abdomen areas. Final quote is confirmed in
+            person.
+          </div>
         </CardContent>
       </Card>
     </div>
@@ -87,8 +100,9 @@ export function FatFreezingPricingBlock() {
               {pkg.applicators} applicator{pkg.applicators > 1 ? "s" : ""} — £{pkg.priceGbp}
             </CardTitle>
             {pkg.applicators === bestValueApplicators ? (
-              <p className="text-xs font-semibold uppercase tracking-wide text-primary">Best value</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-primary">Best value package</p>
             ) : null}
+            <p className="text-xs text-muted-foreground">Final recommendation confirmed after consultation.</p>
           </CardHeader>
           <CardContent className="space-y-3 text-sm text-muted-foreground">
             {pkg.inclusions.length ? (
@@ -135,6 +149,16 @@ export function CavitationPricingBlock() {
             <p>{pkg.sessions} session package</p>
             <p className="text-2xl font-semibold text-foreground">£{pkg.priceGbp}</p>
             <p>{pkg.description}</p>
+            <details className="rounded-xl border border-border/70 bg-card/80 p-3">
+              <summary className="cursor-pointer text-xs font-semibold uppercase tracking-wide text-foreground">
+                What affects final plan
+              </summary>
+              <div className="mt-2 space-y-1 text-xs">
+                <p>• Area profile and suitability findings</p>
+                <p>• Session cadence and review windows</p>
+                <p>• Combined pathway decisions, if appropriate</p>
+              </div>
+            </details>
             <div className="space-y-2">
               <Button asChild className="w-full">
                 <Link href="/book">Book Free Consultation</Link>
@@ -151,4 +175,3 @@ export function CavitationPricingBlock() {
     </div>
   );
 }
-

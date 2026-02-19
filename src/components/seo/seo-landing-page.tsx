@@ -2,6 +2,8 @@ import Link from "next/link";
 import Script from "next/script";
 import { CheckCircle2, TriangleAlert } from "lucide-react";
 import { CTACluster } from "@/components/layout/CTACluster";
+import { HeroShell } from "@/components/layout/HeroShell";
+import { ProofRow } from "@/components/layout/ProofRow";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
@@ -31,27 +33,27 @@ export function SeoLandingPage({ page }: { page: SeoLandingConfig }) {
         }}
       />
 
-      <Section
-        className="pt-10 sm:pt-14"
-        containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10"
-        variant="gradient"
-      >
-        <div className="mb-8 space-y-2.5 sm:mb-10">
-          <p className="eyebrow">Leeds Service</p>
-          <h1 className="max-w-4xl text-balance text-[2.05rem] font-semibold leading-[1.1] text-foreground sm:text-[3rem]">
-            {page.h1}
-          </h1>
-          <p className="lead">{page.benefitLine}</p>
-        </div>
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-          <div className="space-y-4">
-            <p className="lead">{page.intro}</p>
-            <p className="text-sm font-semibold text-secondary">
-              From £99 • Final price depends on area and plan confirmed in consultation
-            </p>
-            <CTACluster />
-          </div>
-          <ImageFrame alt={page.h1} className="min-h-[250px]" illustration={page.illustration} />
+      <HeroShell
+        ctaCluster={<CTACluster />}
+        eyebrow="Leeds Service"
+        priceTeaser="From £99 • Final price depends on area and plan confirmed in consultation"
+        subline={page.benefitLine}
+        title={page.h1}
+        trustPills={["Leeds clinic (LS11)", "Results vary", "Consultation required", "From £99"]}
+        typewriterPhrases={[
+          "Spot-fat reduction, mapped in consultation.",
+          "Transparent pricing — Leeds clinic (LS11).",
+          "Message us on WhatsApp — fast replies.",
+          "Free consultation + suitability review.",
+          "Clinically guided plan. No rushed decisions."
+        ]}
+        visual={<ImageFrame alt={page.h1} className="min-h-[280px]" illustration={page.illustration} />}
+      />
+
+      <Section className="pt-0">
+        <div className="space-y-2">
+          <p className="lead">{page.intro}</p>
+          <ProofRow items={["Consultation-led, clinically guided, Leeds clinic (LS11)."]} />
         </div>
       </Section>
 

@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { nearLeedsAreas } from "@/content/locations";
 import { buildMetadata } from "@/lib/seo";
+import { availabilityConfig } from "@/content/availability";
 import { siteConfig } from "@/content/site";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
@@ -37,21 +39,45 @@ export async function generateMetadata({ params }: { params: { area: string } })
 export default function AreaLocationPage({ params }: { params: { area: string } }) {
   const area = nearLeedsAreas.find((entry) => entry.slug === params.area);
   if (!area) notFound();
+  const hoursSummary = [
+    `Mon-Tue ${availabilityConfig.openingHours.monday[0]?.start}-${availabilityConfig.openingHours.monday[0]?.end}`,
+    `Wed-Thu ${availabilityConfig.openingHours.wednesday[0]?.start}-${availabilityConfig.openingHours.wednesday[0]?.end}`,
+    `Fri ${availabilityConfig.openingHours.friday[0]?.start}-${availabilityConfig.openingHours.friday[0]?.end}`,
+    `Sat ${availabilityConfig.openingHours.saturday[0]?.start}-${availabilityConfig.openingHours.saturday[0]?.end}`,
+    "Sun Closed"
+  ].join(" • ");
 
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Area Page"
-          subtext={`Treatment for ${area.name} clients is delivered at our Leeds clinic on Tunstall Road, LS11 5HL.`}
-          title={`Aqualyx in ${area.name} (Leeds)`}
-        />
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-          <div className="space-y-4 text-sm text-muted-foreground">
-            <p>{area.intro}</p>
-            <CTACluster compact />
-          </div>
-          <ImageFrame alt={`Aqualyx in ${area.name}`} illustration="clinic" />
+      <HeroShell
+        ctaCluster={<CTACluster compact />}
+        eyebrow="Area Page"
+        priceTeaser="Treatment delivered at LS11 clinic"
+        subline={`Treatment for ${area.name} clients is delivered at our Leeds clinic on Tunstall Road, LS11 5HL.`}
+        title={`Aqualyx in ${area.name} (Leeds)`}
+        typewriterPhrases={[
+          `Serving ${area.name} with Leeds clinic treatment`,
+          "Consultation-led pathway with transparent pricing",
+          "Book online or message us on WhatsApp"
+        ]}
+        visual={<ImageFrame alt={`Aqualyx in ${area.name}`} illustration="locationMap" />}
+      />
+
+      <Section className="pt-0">
+        <p className="mb-4 text-sm text-muted-foreground">{area.intro}</p>
+        <div className="overflow-hidden rounded-[1.4rem] border border-border/70 bg-card shadow-soft">
+          <table className="w-full text-left text-sm">
+            <tbody>
+              <tr className="border-b border-border/60">
+                <th className="w-44 px-3 py-2 text-xs uppercase tracking-wide text-muted-foreground">Clinic address</th>
+                <td className="px-3 py-2 text-muted-foreground">{siteConfig.address}</td>
+              </tr>
+              <tr>
+                <th className="px-3 py-2 text-xs uppercase tracking-wide text-muted-foreground">Opening hours</th>
+                <td className="px-3 py-2 text-muted-foreground">{hoursSummary}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </Section>
 
@@ -168,4 +194,3 @@ export default function AreaLocationPage({ params }: { params: { area: string } 
     </>
   );
 }
-

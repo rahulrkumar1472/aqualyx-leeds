@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
+import { availabilityConfig } from "@/content/availability";
 import { nearLeedsAreas } from "@/content/locations";
+import { siteConfig } from "@/content/site";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CtaStrip } from "@/components/site/cta-strip";
@@ -16,18 +19,44 @@ export const metadata = buildMetadata({
 });
 
 export default function NearLeedsPage() {
+  const hoursSummary = [
+    `Mon-Tue ${availabilityConfig.openingHours.monday[0]?.start}-${availabilityConfig.openingHours.monday[0]?.end}`,
+    `Wed-Thu ${availabilityConfig.openingHours.wednesday[0]?.start}-${availabilityConfig.openingHours.wednesday[0]?.end}`,
+    `Fri ${availabilityConfig.openingHours.friday[0]?.start}-${availabilityConfig.openingHours.friday[0]?.end}`,
+    `Sat ${availabilityConfig.openingHours.saturday[0]?.start}-${availabilityConfig.openingHours.saturday[0]?.end}`,
+    "Sun Closed"
+  ].join(" • ");
+
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Local Coverage"
-          subtext="Serving Leeds and surrounding areas from one LS11 clinic with transparent pricing and fast booking support."
-          title="Areas near Leeds"
-        />
-        <ImageFrame alt="Near Leeds coverage illustration" illustration="clinic" className="min-h-[260px]" />
-      </Section>
+      <HeroShell
+        eyebrow="Local Coverage"
+        priceTeaser="Treatment delivered at LS11 clinic"
+        subline="Serving Leeds and surrounding areas from one LS11 clinic with transparent pricing and fast booking support."
+        title="Areas near Leeds"
+        typewriterPhrases={[
+          "One Leeds clinic serving surrounding areas",
+          "Book online or message us on WhatsApp",
+          "Consultation-led planning for each area"
+        ]}
+        visual={<ImageFrame alt="Near Leeds coverage illustration" className="min-h-[260px]" illustration="locationMap" />}
+      />
 
       <Section>
+        <div className="mb-4 overflow-hidden rounded-[1.4rem] border border-border/70 bg-card shadow-soft">
+          <table className="w-full text-left text-sm">
+            <tbody>
+              <tr className="border-b border-border/60">
+                <th className="w-44 px-3 py-2 text-xs uppercase tracking-wide text-muted-foreground">Address</th>
+                <td className="px-3 py-2 text-muted-foreground">{siteConfig.address}</td>
+              </tr>
+              <tr>
+                <th className="px-3 py-2 text-xs uppercase tracking-wide text-muted-foreground">Opening hours</th>
+                <td className="px-3 py-2 text-muted-foreground">{hoursSummary}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <SectionHeading title="Choose your local area page" />
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {nearLeedsAreas.map((area) => (
@@ -80,4 +109,3 @@ export default function NearLeedsPage() {
     </>
   );
 }
-

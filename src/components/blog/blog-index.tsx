@@ -85,12 +85,12 @@ export function BlogIndex({ posts }: BlogIndexProps) {
 
       <div className="space-y-4">
         <div className="flex items-end justify-between gap-3">
-          <h3 className="text-2xl font-semibold">Top reads</h3>
+          <h3 className="text-2xl font-semibold">Featured</h3>
           <p className="text-sm text-muted-foreground">Most useful starting points</p>
         </div>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="flex snap-x gap-4 overflow-x-auto pb-1">
           {topReads.map((post) => (
-            <Card className="border-border/70 shadow-soft" key={`top-${post.slug}`}>
+            <Card className="min-w-[290px] snap-start border-border/70 shadow-soft md:min-w-[340px]" key={`top-${post.slug}`}>
               <CardHeader className="space-y-3">
                 <ImageFrame
                   alt={post.title}

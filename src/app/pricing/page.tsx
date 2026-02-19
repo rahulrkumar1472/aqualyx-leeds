@@ -2,12 +2,14 @@ import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 import { pricingConfig } from "@/content/pricing";
 import { pricingFaqs } from "@/content/faqs";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
+import { WhatsAppPanel } from "@/components/site/whatsapp-panel";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -42,20 +44,19 @@ const pricingPages = [
 export default function PricingPage() {
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Transparent Pricing"
-          subtext="Use this hub for fast comparison, then book consultation for your confirmed treatment plan."
-          title="Pricing in Leeds"
-        />
-        <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-          <div className="space-y-3 text-sm text-muted-foreground">
-            <p>All prices are guide-level and final totals are confirmed after clinical assessment.</p>
-            <CTACluster compact />
-          </div>
-          <ImageFrame alt="Pricing illustration" illustration="clinic" />
-        </div>
-      </Section>
+      <HeroShell
+        ctaCluster={<CTACluster compact />}
+        eyebrow="Transparent Pricing"
+        priceTeaser="From £99 • Final plan confirmed after suitability review"
+        subline="Use this hub for fast comparison, then book consultation for your confirmed treatment plan."
+        title="Pricing in Leeds"
+        typewriterPhrases={[
+          "Transparent pricing with consultation-first guidance.",
+          "Per-ml and package options explained clearly.",
+          "Message us on WhatsApp for quick estimate support."
+        ]}
+        visual={<ImageFrame alt="Pricing illustration" illustration="pricing" />}
+      />
 
       <Section>
         <SectionHeading title="Choose a pricing page" />
@@ -75,6 +76,13 @@ export default function PricingPage() {
             </Card>
           ))}
         </div>
+      </Section>
+
+      <Section className="pt-0">
+        <WhatsAppPanel
+          description="Need a quick cost-direction before booking? Message us on WhatsApp and we’ll guide you to the right pricing page."
+          title="Quick pricing help"
+        />
       </Section>
 
       <Section variant="muted">
@@ -111,4 +119,3 @@ export default function PricingPage() {
     </>
   );
 }
-

@@ -1,7 +1,7 @@
 import { Star } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { TestimonialCard } from "@/components/ui/testimonial-card";
 import { siteConfig } from "@/content/site";
 
 type Review = {
@@ -73,16 +73,6 @@ async function getGoogleReviews(): Promise<Review[]> {
   }
 }
 
-function Stars({ rating }: { rating: number }) {
-  return (
-    <div className="flex gap-1">
-      {Array.from({ length: 5 }).map((_, index) => (
-        <Star className={`h-4 w-4 ${index < rating ? "fill-primary text-primary" : "text-muted-foreground"}`} key={`${rating}-${index}`} />
-      ))}
-    </div>
-  );
-}
-
 export async function ReviewsSection() {
   const reviews = await getGoogleReviews();
   const dynamicMode = Boolean(process.env.GOOGLE_PLACES_API_KEY);
@@ -105,21 +95,24 @@ export async function ReviewsSection() {
       </div>
       <div className="flex snap-x gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
         {reviews.map((review, index) => (
-          <Card className="h-full min-w-[280px] snap-start border-primary/15 shadow-soft md:min-w-0" key={`${review.author}-${index}`}>
-            <CardHeader>
-              <div className="flex items-center justify-between gap-2">
-                <CardTitle className="text-base">{review.author}</CardTitle>
-                <Badge variant="outline">{dynamicMode ? "Google Review" : "Client Testimonial"}</Badge>
+          <div className="min-w-[280px] snap-start md:min-w-0" key={`${review.author}-${index}`}>
+            <div className="mb-2 flex items-center justify-between gap-2 px-1">
+              <div className="flex gap-1">
+                {Array.from({ length: 5 }).map((_, star) => (
+                  <Star
+                    className={`h-4 w-4 ${star < review.rating ? "fill-primary text-primary" : "text-muted-foreground"}`}
+                    key={`${review.author}-${star}`}
+                  />
+                ))}
               </div>
-            </CardHeader>
-            <CardContent className="space-y-3 text-sm text-muted-foreground">
-              <Stars rating={review.rating} />
-              <p>{review.text}</p>
-              <p className="text-xs uppercase tracking-wide text-muted-foreground/90">
-                Source: {dynamicMode ? "Google Business" : "Verified testimonial"}
-              </p>
-            </CardContent>
-          </Card>
+              <Badge variant="outline">{dynamicMode ? "Google Review" : "Client Testimonial"}</Badge>
+            </div>
+            <TestimonialCard
+              city="Leeds"
+              name={review.author}
+              quote={`${review.text} (${dynamicMode ? "Source: Google Business" : "Source: verified testimonial"})`}
+            />
+          </div>
         ))}
       </div>
     </section>

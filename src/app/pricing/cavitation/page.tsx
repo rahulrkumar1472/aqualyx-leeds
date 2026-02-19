@@ -2,6 +2,8 @@ import { CavitationPricingBlock } from "@/components/sections/pricing-blocks";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
+import { WhatsAppPanel } from "@/components/site/whatsapp-panel";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
@@ -18,20 +20,26 @@ export const metadata = buildMetadata({
 export default function CavitationPricingPage() {
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Session Packages"
-          subtext="Use package options as a guide before your consultation and suitability review."
-          title="Ultrasound Cavitation Pricing in Leeds"
-        />
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-          <CTACluster compact />
-          <ImageFrame alt="Cavitation pricing illustration" illustration="cavitation" />
-        </div>
-      </Section>
+      <HeroShell
+        ctaCluster={<CTACluster compact />}
+        eyebrow="Session Packages"
+        priceTeaser="Packages from £59"
+        subline="Use package options as a guide before your consultation and suitability review."
+        title="Ultrasound Cavitation Pricing in Leeds"
+        typewriterPhrases={[
+          "Session-based non-invasive contour pricing.",
+          "Compare package structure before booking.",
+          "Chat on WhatsApp for quick plan guidance."
+        ]}
+        visual={<ImageFrame alt="Cavitation pricing illustration" illustration="pricing" />}
+      />
 
       <Section>
         <CavitationPricingBlock />
+      </Section>
+
+      <Section className="pt-0">
+        <WhatsAppPanel title="Need guidance on session packages?" />
       </Section>
 
       <Section variant="muted">
@@ -68,4 +76,3 @@ export default function CavitationPricingPage() {
     </>
   );
 }
-

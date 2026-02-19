@@ -1,5 +1,6 @@
 import { buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/content/site";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
@@ -17,17 +18,17 @@ export const metadata = buildMetadata({
 export default function AboutPage() {
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="About"
-          subtext="Aqualyx Leeds focuses on consultation-led contour pathways with transparent communication and realistic expectations."
-          title="About Aqualyx Leeds"
-        />
-        <div className="grid gap-6 lg:grid-cols-2">
-          <ImageFrame alt="Aqualyx clinic illustration" illustration="clinic" />
-          <ImageFrame alt="Aqualyx treatment illustration" illustration="aqualyx" />
-        </div>
-      </Section>
+      <HeroShell
+        eyebrow="About"
+        subline="Aqualyx Leeds focuses on consultation-led contour pathways with transparent communication and realistic expectations."
+        title="About Aqualyx Leeds"
+        typewriterPhrases={[
+          "Consultation-led, clinically guided approach",
+          "Transparent pricing and realistic expectations",
+          "Leeds clinic support with WhatsApp-first communication"
+        ]}
+        visual={<ImageFrame alt="Aqualyx clinic illustration" illustration="clinic" />}
+      />
 
       <Section>
         <SectionHeading title="What guides our approach" />
@@ -92,4 +93,3 @@ export default function AboutPage() {
     </>
   );
 }
-

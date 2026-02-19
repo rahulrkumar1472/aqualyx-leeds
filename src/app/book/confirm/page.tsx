@@ -1,7 +1,8 @@
 import { Clock3, MapPin, PhoneCall } from "lucide-react";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
-import { SectionHeading } from "@/components/layout/SectionHeading";
 import { BookingConfirmTracker } from "@/components/booking/booking-confirm-tracker";
+import { ImageFrame } from "@/components/media/ImageFrame";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { availabilityConfig } from "@/content/availability";
@@ -39,12 +40,20 @@ export default function BookConfirmPage({
   return (
     <>
       <BookingConfirmTracker reference={ref} />
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/90 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Confirmation"
-          subtext={`Thanks ${firstName}, your consultation request has been received.`}
-          title="Booking request submitted"
-        />
+      <HeroShell
+        eyebrow="Confirmation"
+        subline={`Thanks ${firstName}, your consultation request has been received.`}
+        title="Booking request submitted"
+        trustPills={["Leeds clinic (LS11)", "WhatsApp follow-up", "Consultation-led", "Results vary"]}
+        typewriterPhrases={[
+          "Your request is in and queued for review",
+          "We will contact you within 24 working hours",
+          "Keep your reference ready for quick support"
+        ]}
+        visual={<ImageFrame alt="Booking confirmation" illustration="clinic" />}
+      />
+
+      <Section className="pt-0">
         <div className="rounded-2xl border border-primary/25 bg-primary/5 p-4">
           <p className="text-sm text-muted-foreground">Reference ID</p>
           <p className="text-xl font-semibold text-foreground">{ref}</p>

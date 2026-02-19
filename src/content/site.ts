@@ -33,6 +33,8 @@ export const siteConfig = {
   name: "Aqualyx Leeds",
   domain: "aqualyxleeds.com",
   siteUrl: envSiteUrl && /^https?:\/\//.test(envSiteUrl) ? envSiteUrl : "https://aqualyxleeds.com",
+  bookingPath: "/book",
+  offerCopy: "Limited availability: claim 25% off + free personal coaching",
   address: envAddress || defaultAddress,
   addressStructured: {
     streetAddress: "Tunstall Road",
@@ -50,6 +52,7 @@ export const siteConfig = {
     "Hi, I would like to find out more about Aqualyx in Leeds and book",
   whatsappUrl: envWhatsApp || defaultWhatsApp,
   googleBusinessUrl: "https://share.google/gZYI1lIiRVhouJFF8",
+  openingHoursDisplay: "Mon-Tue 09:30-18:30 • Wed-Thu 09:30-19:00 • Fri 09:30-17:30 • Sat 10:00-15:00 • Sun Closed",
   trustPillars: ["Transparent Pricing", "Leeds Clinic", "Free Consultation"],
   social: {
     whatsapp: envWhatsApp || defaultWhatsApp

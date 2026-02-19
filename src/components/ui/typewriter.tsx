@@ -87,13 +87,16 @@ export function Typewriter({
   return (
     <p
       aria-live="polite"
-      className={cn("min-h-[1.5rem] text-sm text-secondary sm:text-base", className)}
+      className={cn(
+        "h-[1.75rem] overflow-hidden text-ellipsis whitespace-nowrap text-sm text-secondary sm:h-[1.9rem] sm:text-base",
+        className
+      )}
     >
       {display}
       <span
         aria-hidden="true"
         className={cn(
-          "ml-1 inline-block h-[1.1em] w-[0.08em] translate-y-0.5 bg-primary",
+          "ml-1 inline-block h-[1.02em] w-[0.075em] translate-y-0.5 bg-primary/85",
           reduceMotion ? "" : "animate-caret"
         )}
       />

@@ -1,8 +1,10 @@
 import { buildMetadata } from "@/lib/seo";
+import { availabilityConfig } from "@/content/availability";
 import { siteConfig } from "@/content/site";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
-import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
+import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
@@ -16,23 +18,31 @@ export const metadata = buildMetadata({
 });
 
 export default function LeedsLocationPage() {
+  const openingRows = [
+    { day: "Monday", slots: availabilityConfig.openingHours.monday },
+    { day: "Tuesday", slots: availabilityConfig.openingHours.tuesday },
+    { day: "Wednesday", slots: availabilityConfig.openingHours.wednesday },
+    { day: "Thursday", slots: availabilityConfig.openingHours.thursday },
+    { day: "Friday", slots: availabilityConfig.openingHours.friday },
+    { day: "Saturday", slots: availabilityConfig.openingHours.saturday },
+    { day: "Sunday", slots: availabilityConfig.openingHours.sunday }
+  ];
+
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Leeds Clinic"
-          subtext="Consultation-led treatment planning at the LS11 clinic with WhatsApp-first support."
-          title="Aqualyx in Leeds (LS11)"
-        />
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-          <div className="space-y-2 text-sm text-muted-foreground">
-            <p>{siteConfig.address}</p>
-            <p>Phone: {siteConfig.phoneDisplay}</p>
-            <CTACluster compact />
-          </div>
-          <ImageFrame alt="Leeds clinic illustration" illustration="clinic" />
-        </div>
-      </Section>
+      <HeroShell
+        ctaCluster={<CTACluster compact />}
+        eyebrow="Leeds Clinic"
+        priceTeaser={siteConfig.address}
+        subline="Consultation-led treatment planning at the LS11 clinic with WhatsApp-first support."
+        title="Aqualyx in Leeds (LS11)"
+        typewriterPhrases={[
+          "Leeds clinic with clear access and map links",
+          "WhatsApp-first support with call backup",
+          "Book online and confirm your consultation slot"
+        ]}
+        visual={<ImageFrame alt="Leeds clinic illustration" illustration="locationMap" />}
+      />
 
       <Section>
         <SectionHeading title="How to get to us" />
@@ -67,6 +77,31 @@ export default function LeedsLocationPage() {
       <Section variant="muted">
         <SectionHeading title="Map and local trust links" />
         <div className="space-y-4">
+          <div className="overflow-hidden rounded-[1.4rem] border border-border/70 bg-card shadow-soft">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-muted/50 text-xs uppercase tracking-wide text-muted-foreground">
+                <tr>
+                  <th className="px-3 py-2">Address</th>
+                  <th className="px-3 py-2">Opening hours</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr className="border-t border-border/60 align-top">
+                  <td className="px-3 py-3 text-muted-foreground">{siteConfig.address}</td>
+                  <td className="px-3 py-3">
+                    <div className="space-y-1 text-xs text-muted-foreground">
+                      {openingRows.map((row) => (
+                        <p key={row.day}>
+                          <span className="font-medium text-foreground">{row.day}:</span>{" "}
+                          {row.slots.length ? row.slots.map((slot) => `${slot.start}-${slot.end}`).join(", ") : "Closed"}
+                        </p>
+                      ))}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <iframe
             className="h-80 w-full rounded-[1.5rem] border border-border/70 bg-card"
             loading="lazy"
@@ -131,4 +166,3 @@ export default function LeedsLocationPage() {
     </>
   );
 }
-

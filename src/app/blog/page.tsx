@@ -1,6 +1,7 @@
 import { BlogIndex } from "@/components/blog/blog-index";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
-import { SectionHeading } from "@/components/layout/SectionHeading";
+import { ImageFrame } from "@/components/media/ImageFrame";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { buildMetadata } from "@/lib/seo";
@@ -18,12 +19,21 @@ export default async function BlogPage() {
 
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Knowledge Hub"
-          subtext="Read practical, consultation-safe guides that explain options, timelines, pricing, and suitability in plain language."
-          title="Aqualyx Leeds Blog"
-        />
+      <HeroShell
+        eyebrow="Knowledge Hub"
+        priceTeaser="Learn before you book"
+        subline="Read practical, consultation-safe guides that explain options, timelines, pricing, and suitability in plain language."
+        title="Aqualyx Leeds Blog"
+        trustPills={["Leeds-focused guides", "Safety-first tone", "Pricing clarity", "Consultation required"]}
+        typewriterPhrases={[
+          "Clinical-style guidance in plain English",
+          "Leeds-focused pricing, safety, and suitability articles",
+          "Book or WhatsApp directly from any guide"
+        ]}
+        visual={<ImageFrame alt="Aqualyx Leeds blog" illustration="blog" />}
+      />
+
+      <Section className="pt-0">
         <p className="max-w-[65ch] text-sm text-muted-foreground">
           Articles are educational and do not replace a consultation. Suitability, contraindications, and treatment
           planning are confirmed with a clinician.
@@ -75,4 +85,3 @@ export default async function BlogPage() {
     </>
   );
 }
-

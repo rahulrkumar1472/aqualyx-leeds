@@ -4,6 +4,7 @@ import Script from "next/script";
 import type { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import { CTACluster } from "@/components/layout/CTACluster";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
@@ -11,7 +12,7 @@ import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { buildMetadata, faqSchema } from "@/lib/seo";
+import { articleSchema, buildMetadata, faqSchema } from "@/lib/seo";
 import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/blog";
 
 function slugify(value: string) {
@@ -59,9 +60,31 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   const [post, allPosts] = await Promise.all([getBlogPostBySlug(params.slug), getAllBlogPosts()]);
   if (!post) notFound();
   const relatedPosts = allPosts.filter((item) => item.slug !== post.slug).slice(0, 3);
+  const published = new Date(post.date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  const updated = new Date(post.updatedAt).toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
 
   return (
     <>
+      <Script
+        id={`${post.slug}-article-schema`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            articleSchema({
+              headline: post.title,
+              description: post.description,
+              path: `/blog/${post.slug}`,
+              datePublished: post.date,
+              dateModified: post.updatedAt,
+              section: post.category
+            })
+          )
+        }}
+      />
       {post.faqs.length ? (
         <Script
           id={`${post.slug}-faq-schema`}
@@ -70,18 +93,19 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         />
       ) : null}
 
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-          <div className="space-y-4">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary">{post.category}</p>
-            <h1>{post.title}</h1>
-            <p className="text-sm text-muted-foreground">{post.description}</p>
-            <p className="text-xs text-muted-foreground">
-              {new Date(post.date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })} •{" "}
-              {post.readTime}
-            </p>
-            <CTACluster compact includeCall={false} />
-          </div>
+      <HeroShell
+        ctaCluster={<CTACluster compact includeCall={false} />}
+        eyebrow={post.category}
+        priceTeaser={`${published} • ${post.readTime}`}
+        subline={post.description}
+        title={post.title}
+        trustPills={["Leeds-focused guide", "Consultation required", "Results vary", "WhatsApp support"]}
+        typewriterPhrases={[
+          "Learn before you book",
+          "Clinical-style guidance in plain English",
+          "Suitability is confirmed in consultation"
+        ]}
+        visual={
           <ImageFrame
             alt={post.title}
             className="min-h-[280px]"
@@ -93,7 +117,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 : "aqualyx"
             }
           />
-        </div>
+        }
+      />
+
+      <Section className="pt-0">
+        <p className="text-xs text-muted-foreground">By {post.author} • {post.reviewer} • Updated {updated}</p>
       </Section>
 
       <Section>
@@ -105,7 +133,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
       <Section className="pt-0">
         <div className="grid gap-6 lg:grid-cols-[300px_minmax(0,1fr)]">
-          <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
+          <aside className="hidden space-y-4 lg:sticky lg:top-28 lg:block lg:self-start">
             <Card className="border-border/70 shadow-soft">
               <CardHeader>
                 <CardTitle>Table of contents</CardTitle>
@@ -125,6 +153,26 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           </aside>
 
           <div className="space-y-5">
+            <Card className="border-border/70 shadow-soft lg:hidden">
+              <CardHeader>
+                <CardTitle>Table of contents</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <details>
+                  <summary className="cursor-pointer text-sm font-semibold text-foreground">Open sections</summary>
+                  <ol className="mt-3 space-y-2 text-sm text-muted-foreground">
+                    {post.outline.map((item, index) => (
+                      <li key={`${item}-mobile`}>
+                        <a className="hover:text-foreground hover:underline" href={`#${slugify(item)}`}>
+                          {index + 1}. {item}
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
+                </details>
+              </CardContent>
+            </Card>
+
             <Card className="border-border/70 shadow-soft">
               <CardHeader>
                 <CardTitle>Key takeaways</CardTitle>
@@ -135,6 +183,42 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                     <li key={item}>• {item}</li>
                   ))}
                 </ul>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border/70 shadow-soft">
+              <CardHeader>
+                <CardTitle>Quick consultation snapshot</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-hidden rounded-xl border border-border/70">
+                  <table className="w-full text-left text-sm">
+                    <tbody>
+                      <tr className="border-b border-border/60">
+                        <td className="px-3 py-2 font-medium">Category</td>
+                        <td className="px-3 py-2 text-muted-foreground">{post.category}</td>
+                      </tr>
+                      <tr className="border-b border-border/60">
+                        <td className="px-3 py-2 font-medium">Read time</td>
+                        <td className="px-3 py-2 text-muted-foreground">{post.readTime}</td>
+                      </tr>
+                      <tr className="border-b border-border/60">
+                        <td className="px-3 py-2 font-medium">Updated</td>
+                        <td className="px-3 py-2 text-muted-foreground">
+                          {new Date(post.updatedAt).toLocaleDateString("en-GB", {
+                            day: "numeric",
+                            month: "short",
+                            year: "numeric"
+                          })}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-3 py-2 font-medium">Consultation</td>
+                        <td className="px-3 py-2 text-muted-foreground">Required for suitability and final plan</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </CardContent>
             </Card>
 
@@ -185,8 +269,43 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 {post.content}
               </ReactMarkdown>
             </article>
+
+            <Card className="border-border/70 shadow-soft">
+              <CardHeader>
+                <CardTitle>Decision table</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-hidden rounded-xl border border-border/70">
+                  <table className="w-full text-left text-sm">
+                    <thead className="bg-muted/50 text-xs uppercase tracking-wide text-muted-foreground">
+                      <tr>
+                        <th className="px-3 py-2">When this helps</th>
+                        <th className="px-3 py-2">Best next step</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-t border-border/60">
+                        <td className="px-3 py-2 text-muted-foreground">You need area-specific suitability clarity</td>
+                        <td className="px-3 py-2 text-muted-foreground">Book consultation and review treatment options</td>
+                      </tr>
+                      <tr className="border-t border-border/60">
+                        <td className="px-3 py-2 text-muted-foreground">You need quick answer first</td>
+                        <td className="px-3 py-2 text-muted-foreground">Message on WhatsApp, then book if appropriate</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
+      </Section>
+
+      <Section className="pt-0">
+        <CtaStrip
+          description="If you want a personalised recommendation by area, start with WhatsApp and then book."
+          title="Need a tailored treatment recommendation?"
+        />
       </Section>
 
       {post.faqs.length ? (

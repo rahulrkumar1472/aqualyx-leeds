@@ -1,6 +1,6 @@
 import { TreatmentPageTemplate } from "@/components/treatment-page";
 import { CavitationPricingBlock } from "@/components/sections/pricing-blocks";
-import { assetAt, assets } from "@/content/assets";
+import { getAsset } from "@/content/assets";
 import { treatments } from "@/content/treatments";
 import { buildMetadata } from "@/lib/seo";
 
@@ -17,7 +17,7 @@ export default function CavitationPage() {
     <TreatmentPageTemplate
       areas={treatment.areas}
       illustration="cavitation"
-      coverImage={assetAt(assets.treatments.cavitation, 0)}
+      coverImage={getAsset("treatments/ultrasound-cavitation", "hero")}
       intro="Ultrasound Cavitation in Leeds supports non-invasive contouring plans through package-based sessions and structured reviews."
       pricingSection={<CavitationPricingBlock />}
       pricingTeaser="Session packages with clear pricing and staged treatment planning."

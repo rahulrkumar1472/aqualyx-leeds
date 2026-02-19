@@ -1,6 +1,8 @@
 import { TreatmentPageTemplate } from "@/components/treatment-page";
 import { FatDissolvingPricingBlock } from "@/components/sections/pricing-blocks";
-import { assetAt, assets } from "@/content/assets";
+import { SectionHeading } from "@/components/layout/SectionHeading";
+import { ComparisonTable } from "@/components/ui/comparison-table";
+import { getAsset } from "@/content/assets";
 import { pricingConfig } from "@/content/pricing";
 import { treatments } from "@/content/treatments";
 import { buildMetadata } from "@/lib/seo";
@@ -14,14 +16,41 @@ export const metadata = buildMetadata({
 
 export default function AqualyxPage() {
   const treatment = treatments.aqualyx;
+  const comparisonRows = [
+    {
+      feature: "Best fit",
+      aqualyx: "Localised stubborn fat pockets after suitability review",
+      alternatives: "May suit different profiles depending on modality"
+    },
+    {
+      feature: "Planning method",
+      aqualyx: "Per-area dosage planning and staged review",
+      alternatives: "Package/session planning based on selected treatment"
+    },
+    {
+      feature: "Timeline profile",
+      aqualyx: "Gradual progress over planned weeks",
+      alternatives: "Also gradual and varies by treatment route"
+    }
+  ];
 
   return (
     <TreatmentPageTemplate
       areas={treatment.areas}
       illustration="aqualyx"
-      coverImage={assetAt(assets.treatments.aqualyx, 0)}
+      coverImage={getAsset("treatments/aqualyx", "hero")}
       intro="Aqualyx Leeds provides a premium clinical pathway for targeted fat dissolving injections, including treatment planning, suitability checks and aftercare guidance."
       pricingSection={<FatDissolvingPricingBlock />}
+      comparisonSection={
+        <>
+          <SectionHeading
+            eyebrow="Comparison"
+            subtext="Informational overview only. Consultation confirms the most appropriate option for your goals."
+            title="Aqualyx compared with other contour routes"
+          />
+          <ComparisonTable rows={comparisonRows} />
+        </>
+      }
       pricingTeaser={`From ${pricingConfig.fatDissolving.pricePerMl} per ml with final cost confirmed after assessment.`}
       relatedLinks={[
         {

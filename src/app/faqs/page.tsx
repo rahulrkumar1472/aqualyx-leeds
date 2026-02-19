@@ -1,10 +1,10 @@
 import Script from "next/script";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
-import { SectionHeading } from "@/components/layout/SectionHeading";
-import { CTACluster } from "@/components/layout/CTACluster";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
+import { WhatsAppPanel } from "@/components/site/whatsapp-panel";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { aqualyxFaqs, generalFaqs } from "@/content/faqs";
 import { buildMetadata, faqSchema } from "@/lib/seo";
@@ -15,7 +15,25 @@ export const metadata = buildMetadata({
   path: "/faqs"
 });
 
-const faqItems = [...aqualyxFaqs, ...generalFaqs];
+const bookingFaqs = [
+  {
+    question: "Is consultation free?",
+    answer: "Yes. Consultation is free and used to confirm suitability, timeline, and pricing guidance."
+  },
+  {
+    question: "Can I message before booking?",
+    answer: "Yes. WhatsApp is the fastest route for quick pre-booking questions."
+  },
+  {
+    question: "How fast is follow-up after booking?",
+    answer: "The team usually responds within 24 working hours."
+  },
+  {
+    question: "What details should I prepare?",
+    answer: "Your target area, treatment goals, preferred contact method, and any relevant treatment history."
+  }
+];
+const faqItems = [...aqualyxFaqs, ...generalFaqs, ...bookingFaqs];
 
 export default function FaqPage() {
   return (
@@ -25,20 +43,40 @@ export default function FaqPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(faqItems)) }}
       />
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="FAQ Hub"
-          subtext="Straightforward answers about process, pricing, safety, and booking at Aqualyx Leeds."
-          title="Aqualyx Leeds FAQs"
-        />
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-          <CTACluster compact includeCall={false} />
-          <ImageFrame alt="FAQ illustration" illustration="clinic" />
-        </div>
-      </Section>
+      <HeroShell
+        eyebrow="FAQ Hub"
+        subline="Straightforward answers about process, pricing, safety, and booking at Aqualyx Leeds."
+        title="Aqualyx Leeds FAQs"
+        typewriterPhrases={[
+          "Quick answers before you book",
+          "Consultation is required for final suitability",
+          "Message us on WhatsApp for fast clarifications"
+        ]}
+        visual={<ImageFrame alt="FAQ illustration" illustration="faq" />}
+      />
 
       <Section>
-        <FaqAccordion items={faqItems} />
+        <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
+          <div className="space-y-5">
+            <div>
+              <h2 className="mb-3 text-xl font-semibold">Aqualyx basics</h2>
+              <FaqAccordion items={aqualyxFaqs.slice(0, 4)} />
+            </div>
+            <div>
+              <h2 className="mb-3 text-xl font-semibold">Safety and suitability</h2>
+              <FaqAccordion items={aqualyxFaqs.slice(4)} />
+            </div>
+            <div>
+              <h2 className="mb-3 text-xl font-semibold">Booking and WhatsApp</h2>
+              <FaqAccordion items={bookingFaqs} />
+            </div>
+            <div>
+              <h2 className="mb-3 text-xl font-semibold">General clinic questions</h2>
+              <FaqAccordion items={generalFaqs} />
+            </div>
+          </div>
+          <WhatsAppPanel />
+        </div>
       </Section>
 
       <Section className="pt-0">
@@ -65,4 +103,3 @@ export default function FaqPage() {
     </>
   );
 }
-

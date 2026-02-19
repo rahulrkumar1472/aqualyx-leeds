@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
@@ -18,17 +19,17 @@ export const metadata = buildMetadata({
 export default function NonInvasiveOverviewPage() {
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Non-invasive Options"
-          subtext="Explore cooling and ultrasound pathways with package-led planning and consultation-first suitability checks."
-          title="Non-invasive Fat Reduction in Leeds"
-        />
-        <div className="grid gap-6 lg:grid-cols-2">
-          <ImageFrame alt="Fat freezing illustration" illustration="fatFreezing" />
-          <ImageFrame alt="Cavitation illustration" illustration="cavitation" />
-        </div>
-      </Section>
+      <HeroShell
+        eyebrow="Non-invasive Options"
+        subline="Explore cooling and ultrasound pathways with package-led planning and consultation-first suitability checks."
+        title="Non-invasive Fat Reduction in Leeds"
+        typewriterPhrases={[
+          "Compare cryolipolysis and cavitation routes",
+          "Consultation confirms what may suit your goals",
+          "Quick WhatsApp guidance before booking"
+        ]}
+        visual={<ImageFrame alt="Non-invasive fat reduction options" illustration="fatFreezing" />}
+      />
 
       <Section>
         <SectionHeading actions={<CTACluster compact includeCall={false} />} title="Choose your non-invasive route" />
@@ -82,4 +83,3 @@ export default function NonInvasiveOverviewPage() {
     </>
   );
 }
-

@@ -145,11 +145,11 @@ export async function createBookingLeadAction(
     };
   }
 
-  let leadId = "";
-  let leadFirstName = "";
+  let bookingId = "";
+  let bookingFirstName = "";
 
   try {
-    const lead = await db.lead.create({
+    const booking = await db.booking.create({
       data: {
         firstName: parsed.data.firstName,
         lastName: parsed.data.lastName,
@@ -161,8 +161,6 @@ export async function createBookingLeadAction(
         preferredDate: parsed.data.preferredDate,
         preferredTime: parsed.data.preferredTime,
         message: parsed.data.message,
-        consent: true,
-        marketingOptIn: parsed.data.marketingOptIn === "on",
         source: parsed.data.source,
         pagePath: parsed.data.pagePath,
         utmSource: parsed.data.utmSource,
@@ -172,16 +170,16 @@ export async function createBookingLeadAction(
         utmContent: parsed.data.utmContent
       }
     });
-    leadId = lead.id;
-    leadFirstName = lead.firstName;
+    bookingId = booking.id;
+    bookingFirstName = booking.firstName;
   } catch {
     return {
       error: "We couldn't submit your request right now. Please try again or contact us on WhatsApp."
     };
   }
 
-  const reference = `AL-${leadId.slice(-8).toUpperCase()}`;
-  redirect(`/book/confirm?ref=${encodeURIComponent(reference)}&name=${encodeURIComponent(leadFirstName)}`);
+  const reference = `AL-${bookingId.slice(-8).toUpperCase()}`;
+  redirect(`/book/confirm?ref=${encodeURIComponent(reference)}&name=${encodeURIComponent(bookingFirstName)}`);
 }
 
 const statusSchema = z.object({
@@ -189,7 +187,7 @@ const statusSchema = z.object({
   status: z.enum(["NEW", "CONTACTED", "BOOKED", "CLOSED"])
 });
 
-export async function updateLeadStatusAction(formData: FormData) {
+export async function updateBookingStatusAction(formData: FormData) {
   const parsed = statusSchema.safeParse({
     leadId: getString(formData, "leadId"),
     status: getString(formData, "status")
@@ -197,7 +195,7 @@ export async function updateLeadStatusAction(formData: FormData) {
 
   if (!parsed.success) return;
 
-  await db.lead.update({
+  await db.booking.update({
     where: { id: parsed.data.leadId },
     data: { status: parsed.data.status }
   });

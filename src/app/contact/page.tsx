@@ -1,10 +1,12 @@
 import { buildMetadata } from "@/lib/seo";
+import { availabilityConfig } from "@/content/availability";
 import { siteConfig } from "@/content/site";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
-import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
+import { ContactForm } from "@/components/forms/contact-form";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,22 +18,72 @@ export const metadata = buildMetadata({
 });
 
 export default function ContactPage() {
+  const openingHours = [
+    `Mon-Tue ${availabilityConfig.openingHours.monday[0]?.start}-${availabilityConfig.openingHours.monday[0]?.end}`,
+    `Wed-Thu ${availabilityConfig.openingHours.wednesday[0]?.start}-${availabilityConfig.openingHours.wednesday[0]?.end}`,
+    `Fri ${availabilityConfig.openingHours.friday[0]?.start}-${availabilityConfig.openingHours.friday[0]?.end}`,
+    `Sat ${availabilityConfig.openingHours.saturday[0]?.start}-${availabilityConfig.openingHours.saturday[0]?.end}`,
+    "Sun Closed"
+  ];
+
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Contact"
-          subtext="Speak to us on WhatsApp first for quick answers, then book consultation online."
-          title="Contact Aqualyx Leeds"
-        />
-        <div className="grid gap-6 lg:grid-cols-2">
-          <ImageFrame alt="Clinic illustration" illustration="clinic" />
-          <ImageFrame alt="Treatment illustration" illustration="aqualyx" />
-        </div>
-      </Section>
+      <HeroShell
+        eyebrow="Contact"
+        priceTeaser="WhatsApp-first support"
+        subline="Speak to us on WhatsApp first for quick answers, then book consultation online."
+        title="Contact Aqualyx Leeds"
+        typewriterPhrases={[
+          "Fast WhatsApp replies for treatment questions",
+          "Book your consultation online in minutes",
+          "Leeds clinic support with transparent pricing"
+        ]}
+        visual={<ImageFrame alt="Clinic illustration" illustration="locationMap" />}
+      />
 
       <Section>
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="mb-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <Card className="border-primary/20 bg-primary/5 shadow-soft">
+            <CardContent className="space-y-2 p-4 text-sm">
+              <p className="font-semibold text-foreground">WhatsApp</p>
+              <p className="text-muted-foreground">Fast replies from the Leeds team.</p>
+              <Button asChild size="sm" variant="ctaSecondary">
+                <a href={siteConfig.whatsappUrl} rel="noopener noreferrer" target="_blank">
+                  Message now
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+          <Card className="border-border/70 shadow-soft">
+            <CardContent className="space-y-2 p-4 text-sm">
+              <p className="font-semibold text-foreground">Call</p>
+              <p className="text-muted-foreground">{siteConfig.phoneDisplay}</p>
+              <Button asChild size="sm" variant="ctaTertiary">
+                <a href={siteConfig.phoneHref}>Call clinic</a>
+              </Button>
+            </CardContent>
+          </Card>
+          <Card className="border-border/70 shadow-soft">
+            <CardContent className="space-y-2 p-4 text-sm">
+              <p className="font-semibold text-foreground">Address</p>
+              <p className="text-muted-foreground">{siteConfig.address}</p>
+              <Button asChild size="sm" variant="outline">
+                <a href={siteConfig.mapQueryUrl} rel="noopener noreferrer" target="_blank">
+                  Directions
+                </a>
+              </Button>
+            </CardContent>
+          </Card>
+          <Card className="border-border/70 shadow-soft">
+            <CardContent className="space-y-2 p-4 text-sm">
+              <p className="font-semibold text-foreground">Opening hours</p>
+              <p className="text-muted-foreground">{openingHours.join(" • ")}</p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
+          <ContactForm />
           <Card className="border-border/70 shadow-soft">
             <CardHeader>
               <CardTitle>Clinic details</CardTitle>
@@ -103,4 +155,3 @@ export default function ContactPage() {
     </>
   );
 }
-

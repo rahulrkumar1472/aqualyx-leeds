@@ -2,14 +2,17 @@ import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 import { pricingConfig } from "@/content/pricing";
 import { pricingFaqs } from "@/content/faqs";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
+import { WhatsAppPanel } from "@/components/site/whatsapp-panel";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { ImageFrame } from "@/components/media/ImageFrame";
 
 export const metadata = buildMetadata({
   title: "Aqualyx Leeds Prices",
@@ -21,28 +24,19 @@ export const metadata = buildMetadata({
 export default function PricesPage() {
   return (
     <>
-      <Section
-        className="pt-10 sm:pt-14"
-        containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10"
-        variant="gradient"
-      >
-        <div className="mb-8 space-y-2.5 sm:mb-10">
-          <p className="eyebrow">Pricing</p>
-          <h1 className="max-w-4xl text-balance text-[2.05rem] font-semibold leading-[1.1] text-foreground sm:text-[3rem]">
-            Aqualyx Leeds Prices
-          </h1>
-          <p className="lead">
-            From £99. Final price depends on target area, dosage plan, and consultation findings.
-          </p>
-        </div>
-        <div className="space-y-3 text-sm text-muted-foreground">
-          <p>
-            Use this page for a realistic starting point before booking. Every quote is confirmed only after assessment,
-            suitability checks, and area planning.
-          </p>
-          <CTACluster compact />
-        </div>
-      </Section>
+      <HeroShell
+        ctaCluster={<CTACluster compact />}
+        eyebrow="Pricing Hub"
+        priceTeaser="From £99 per ml"
+        subline="Transparent guide pricing for Leeds clients. Final treatment plan and exact quote are confirmed after consultation."
+        title="Aqualyx Leeds Prices"
+        typewriterPhrases={[
+          "Clear pricing structure before you book",
+          "Suitability-first quote process with no pressure",
+          "Message us on WhatsApp for quick pricing guidance"
+        ]}
+        visual={<ImageFrame alt="Aqualyx Leeds pricing" illustration="pricing" />}
+      />
 
       <Section>
         <SectionHeading title="Price overview" />
@@ -108,6 +102,43 @@ export default function PricesPage() {
             </tbody>
           </table>
         </div>
+      </Section>
+
+      <Section>
+        <SectionHeading title="How we quote" />
+        <div className="grid gap-4 md:grid-cols-3">
+          <Card className="border-border/70 shadow-soft">
+            <CardHeader>
+              <CardTitle className="text-lg">1. Consultation</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              We assess your area, goals, and suitability before discussing treatment dosage.
+            </CardContent>
+          </Card>
+          <Card className="border-border/70 shadow-soft">
+            <CardHeader>
+              <CardTitle className="text-lg">2. Dose estimate</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              Typical ml range is discussed with realistic expectations and timeline context.
+            </CardContent>
+          </Card>
+          <Card className="border-border/70 shadow-soft">
+            <CardHeader>
+              <CardTitle className="text-lg">3. Final quote</CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground">
+              Final cost is confirmed once your plan is agreed after suitability review.
+            </CardContent>
+          </Card>
+        </div>
+      </Section>
+
+      <Section className="pt-0">
+        <WhatsAppPanel
+          description="Send your target area on WhatsApp and we’ll point you to the most relevant pricing route before you book."
+          title="Need fast quote guidance?"
+        />
       </Section>
 
       <Section>

@@ -39,6 +39,25 @@ model LeadCapture {
 }
 
 model Lead {
+  id              String     @id @default(cuid())
+  createdAt       DateTime   @default(now())
+  name            String
+  phone           String
+  email           String
+  interest        String?
+  source          String     @default("website")
+  pagePath        String?
+  message         String?
+  consentMarketing Boolean   @default(false)
+  status          LeadStatus @default(NEW)
+  utmSource       String?
+  utmMedium       String?
+  utmCampaign     String?
+  utmTerm         String?
+  utmContent      String?
+}
+
+model Booking {
   id                     String     @id @default(cuid())
   createdAt              DateTime   @default(now())
   firstName              String
@@ -51,11 +70,9 @@ model Lead {
   preferredDate          String?
   preferredTime          String?
   message                String?
-  consent                Boolean
-  marketingOptIn         Boolean    @default(false)
-  status                 LeadStatus @default(NEW)
   source                 String     @default("website")
   pagePath               String?
+  status                 LeadStatus @default(NEW)
   utmSource              String?
   utmMedium              String?
   utmCampaign            String?

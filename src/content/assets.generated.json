@@ -1,15 +1,159 @@
 {
-  "generatedAt": "2026-02-18T21:48:32.127Z",
+  "generatedAt": "2026-02-19T05:37:12.400Z",
   "sourceDir": "/aqualyxleeds",
   "brand": {
     "logo": "/brand/logo.svg",
+    "icon": "/brand/icon.svg",
     "og": "/brand/og.svg"
+  },
+  "categories": {
+    "hero": {
+      "hero": "/images/hero/hero-1.jpg",
+      "gallery": [
+        "/images/hero/hero-1.jpg",
+        "/images/hero/hero-2.jpg",
+        "/images/hero/hero-3.jpg",
+        "/images/hero/hero-4.jpg",
+        "/images/hero/hero-5.jpg",
+        "/images/hero/hero-6.jpg"
+      ]
+    },
+    "treatments/aqualyx": {
+      "hero": "/images/treatments/aqualyx/aqualyx-1.jpg",
+      "gallery": [
+        "/images/treatments/aqualyx/aqualyx-1.jpg",
+        "/images/treatments/aqualyx/aqualyx-2.jpg",
+        "/images/treatments/aqualyx/aqualyx-3.jpg",
+        "/images/treatments/aqualyx/aqualyx-4.jpg",
+        "/images/treatments/aqualyx/aqualyx-5.jpg",
+        "/images/treatments/aqualyx/aqualyx-6.webp",
+        "/images/treatments/aqualyx/aqualyx-7.webp",
+        "/images/treatments/aqualyx/aqualyx-8.webp"
+      ]
+    },
+    "treatments/fat-freezing": {
+      "hero": "/images/treatments/fat-freezing/fat-freezing-1.jpg",
+      "gallery": [
+        "/images/treatments/fat-freezing/fat-freezing-1.jpg",
+        "/images/treatments/fat-freezing/fat-freezing-2.jpg",
+        "/images/treatments/fat-freezing/fat-freezing-3.jpg",
+        "/images/treatments/fat-freezing/fat-freezing-4.jpg",
+        "/images/treatments/fat-freezing/fat-freezing-5.jpg",
+        "/images/treatments/fat-freezing/fat-freezing-6.webp",
+        "/images/treatments/fat-freezing/fat-freezing-7.webp",
+        "/images/treatments/fat-freezing/fat-freezing-8.webp"
+      ]
+    },
+    "treatments/lemon-bottle": {
+      "hero": "/images/treatments/lemon-bottle/lemon-bottle-1.jpg",
+      "gallery": [
+        "/images/treatments/lemon-bottle/lemon-bottle-1.jpg",
+        "/images/treatments/lemon-bottle/lemon-bottle-2.jpg",
+        "/images/treatments/lemon-bottle/lemon-bottle-3.jpg",
+        "/images/treatments/lemon-bottle/lemon-bottle-4.jpg",
+        "/images/treatments/lemon-bottle/lemon-bottle-5.jpg",
+        "/images/treatments/lemon-bottle/lemon-bottle-6.jpg",
+        "/images/treatments/lemon-bottle/lemon-bottle-7.jpg",
+        "/images/treatments/lemon-bottle/lemon-bottle-8.jpg"
+      ]
+    },
+    "treatments/ultrasound-cavitation": {
+      "hero": "/images/treatments/ultrasound-cavitation/cavitation-1.jpg",
+      "gallery": [
+        "/images/treatments/ultrasound-cavitation/cavitation-1.jpg",
+        "/images/treatments/ultrasound-cavitation/cavitation-2.jpg",
+        "/images/treatments/ultrasound-cavitation/cavitation-3.jpg",
+        "/images/treatments/ultrasound-cavitation/cavitation-4.jpg",
+        "/images/treatments/ultrasound-cavitation/cavitation-5.jpg",
+        "/images/treatments/ultrasound-cavitation/cavitation-6.jpg",
+        "/images/treatments/ultrasound-cavitation/cavitation-7.jpg",
+        "/images/treatments/ultrasound-cavitation/cavitation-8.jpg"
+      ]
+    },
+    "pricing": {
+      "hero": "/images/pricing/pricing-1.jpg",
+      "gallery": [
+        "/images/pricing/pricing-1.jpg",
+        "/images/pricing/pricing-2.jpg",
+        "/images/pricing/pricing-3.jpg",
+        "/images/pricing/pricing-4.jpg",
+        "/images/pricing/pricing-5.jpg",
+        "/images/pricing/pricing-6.jpg"
+      ]
+    },
+    "locations": {
+      "hero": "/images/locations/location-1.jpg",
+      "gallery": [
+        "/images/locations/location-1.jpg",
+        "/images/locations/location-2.webp",
+        "/images/locations/location-3.webp",
+        "/images/locations/location-4.webp",
+        "/images/locations/location-5.webp",
+        "/images/locations/location-6.webp"
+      ]
+    },
+    "blog": {
+      "hero": "/images/blog/blog-1.jpg",
+      "gallery": [
+        "/images/blog/blog-1.jpg",
+        "/images/blog/blog-2.jpg",
+        "/images/blog/blog-3.jpg",
+        "/images/blog/blog-4.jpg",
+        "/images/blog/blog-5.jpg",
+        "/images/blog/blog-6.jpg",
+        "/images/blog/blog-7.jpg",
+        "/images/blog/blog-8.jpg",
+        "/images/blog/blog-9.jpg",
+        "/images/blog/blog-10.webp"
+      ]
+    },
+    "textures/backgrounds": {
+      "hero": "/images/textures/backgrounds/texture-1.jpg",
+      "gallery": [
+        "/images/textures/backgrounds/texture-1.jpg",
+        "/images/textures/backgrounds/texture-2.jpg",
+        "/images/textures/backgrounds/texture-3.webp",
+        "/images/textures/backgrounds/texture-4.webp",
+        "/images/textures/backgrounds/texture-5.webp",
+        "/images/textures/backgrounds/texture-6.webp"
+      ]
+    },
+    "clinic": {
+      "hero": "/images/clinic/clinic-1.jpg",
+      "gallery": [
+        "/images/clinic/clinic-1.jpg",
+        "/images/clinic/clinic-2.webp",
+        "/images/clinic/clinic-3.webp",
+        "/images/clinic/clinic-4.webp",
+        "/images/clinic/clinic-5.webp",
+        "/images/clinic/clinic-6.webp"
+      ]
+    },
+    "results": {
+      "hero": "/images/results/result-1.jpg",
+      "gallery": [
+        "/images/results/result-1.jpg",
+        "/images/results/result-2.jpg",
+        "/images/results/result-3.jpg",
+        "/images/results/result-4.jpg",
+        "/images/results/result-5.jpg",
+        "/images/results/result-6.webp",
+        "/images/results/result-7.webp",
+        "/images/results/result-8.webp",
+        "/images/results/result-9.webp",
+        "/images/results/result-10.webp",
+        "/images/results/result-11.webp",
+        "/images/results/result-12.webp"
+      ]
+    }
   },
   "hero": [
     "/images/hero/hero-1.jpg",
     "/images/hero/hero-2.jpg",
     "/images/hero/hero-3.jpg",
-    "/images/hero/hero-4.jpg"
+    "/images/hero/hero-4.jpg",
+    "/images/hero/hero-5.jpg",
+    "/images/hero/hero-6.jpg"
   ],
   "treatments": {
     "aqualyx": [
@@ -17,27 +161,40 @@
       "/images/treatments/aqualyx/aqualyx-2.jpg",
       "/images/treatments/aqualyx/aqualyx-3.jpg",
       "/images/treatments/aqualyx/aqualyx-4.jpg",
-      "/images/treatments/aqualyx/aqualyx-5.jpg"
+      "/images/treatments/aqualyx/aqualyx-5.jpg",
+      "/images/treatments/aqualyx/aqualyx-6.webp",
+      "/images/treatments/aqualyx/aqualyx-7.webp",
+      "/images/treatments/aqualyx/aqualyx-8.webp"
     ],
     "lemonBottle": [
       "/images/treatments/lemon-bottle/lemon-bottle-1.jpg",
       "/images/treatments/lemon-bottle/lemon-bottle-2.jpg",
       "/images/treatments/lemon-bottle/lemon-bottle-3.jpg",
-      "/images/treatments/lemon-bottle/lemon-bottle-4.jpg"
+      "/images/treatments/lemon-bottle/lemon-bottle-4.jpg",
+      "/images/treatments/lemon-bottle/lemon-bottle-5.jpg",
+      "/images/treatments/lemon-bottle/lemon-bottle-6.jpg",
+      "/images/treatments/lemon-bottle/lemon-bottle-7.jpg",
+      "/images/treatments/lemon-bottle/lemon-bottle-8.jpg"
     ],
     "fatFreezing": [
       "/images/treatments/fat-freezing/fat-freezing-1.jpg",
       "/images/treatments/fat-freezing/fat-freezing-2.jpg",
       "/images/treatments/fat-freezing/fat-freezing-3.jpg",
       "/images/treatments/fat-freezing/fat-freezing-4.jpg",
-      "/images/treatments/fat-freezing/fat-freezing-5.jpg"
+      "/images/treatments/fat-freezing/fat-freezing-5.jpg",
+      "/images/treatments/fat-freezing/fat-freezing-6.webp",
+      "/images/treatments/fat-freezing/fat-freezing-7.webp",
+      "/images/treatments/fat-freezing/fat-freezing-8.webp"
     ],
     "cavitation": [
-      "/images/treatments/cavitation/cavitation-1.jpg",
-      "/images/treatments/cavitation/cavitation-2.jpg",
-      "/images/treatments/cavitation/cavitation-3.jpg",
-      "/images/treatments/cavitation/cavitation-4.jpg",
-      "/images/treatments/cavitation/cavitation-5.jpg"
+      "/images/treatments/ultrasound-cavitation/cavitation-1.jpg",
+      "/images/treatments/ultrasound-cavitation/cavitation-2.jpg",
+      "/images/treatments/ultrasound-cavitation/cavitation-3.jpg",
+      "/images/treatments/ultrasound-cavitation/cavitation-4.jpg",
+      "/images/treatments/ultrasound-cavitation/cavitation-5.jpg",
+      "/images/treatments/ultrasound-cavitation/cavitation-6.jpg",
+      "/images/treatments/ultrasound-cavitation/cavitation-7.jpg",
+      "/images/treatments/ultrasound-cavitation/cavitation-8.jpg"
     ]
   },
   "clinic": [
@@ -45,7 +202,8 @@
     "/images/clinic/clinic-2.webp",
     "/images/clinic/clinic-3.webp",
     "/images/clinic/clinic-4.webp",
-    "/images/clinic/clinic-5.webp"
+    "/images/clinic/clinic-5.webp",
+    "/images/clinic/clinic-6.webp"
   ],
   "results": [
     "/images/results/result-1.jpg",
@@ -57,6 +215,8 @@
     "/images/results/result-7.webp",
     "/images/results/result-8.webp",
     "/images/results/result-9.webp",
-    "/images/results/result-10.webp"
+    "/images/results/result-10.webp",
+    "/images/results/result-11.webp",
+    "/images/results/result-12.webp"
   ]
 }

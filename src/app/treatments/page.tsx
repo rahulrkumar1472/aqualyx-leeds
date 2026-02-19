@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
 import { treatmentNavigation } from "@/content/treatments";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
@@ -20,17 +21,17 @@ export const metadata = buildMetadata({
 export default function TreatmentsOverviewPage() {
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Treatment Hub"
-          subtext="Choose between injection-based and non-invasive options with consultation-led suitability checks."
-          title="Treatments in Leeds"
-        />
-        <div className="grid gap-6 lg:grid-cols-2">
-          <ImageFrame alt="Aqualyx treatment illustration" illustration="aqualyx" />
-          <ImageFrame alt="Non-invasive treatment illustration" illustration="fatFreezing" />
-        </div>
-      </Section>
+      <HeroShell
+        eyebrow="Treatment Hub"
+        subline="Compare injection-based and non-invasive pathways with consultation-led suitability checks."
+        title="Treatments in Leeds"
+        typewriterPhrases={[
+          "Choose the route that fits your area and goals",
+          "Consultation confirms suitability and realistic timeline",
+          "Book online or WhatsApp us for fast guidance"
+        ]}
+        visual={<ImageFrame alt="Treatments in Leeds" illustration="heroAbstract" />}
+      />
 
       <Section>
         <SectionHeading
@@ -91,4 +92,3 @@ export default function TreatmentsOverviewPage() {
     </>
   );
 }
-

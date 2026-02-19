@@ -181,6 +181,9 @@ export function Footer() {
             <Link className="hover:underline" href="/cookie-policy">
               Cookie Policy
             </Link>
+            <Link className="hover:underline" href="/admin">
+              Staff
+            </Link>
           </div>
         </div>
       </Container>

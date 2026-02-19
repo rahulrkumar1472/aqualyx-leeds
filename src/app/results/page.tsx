@@ -2,10 +2,10 @@ import Link from "next/link";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
-import { SmartImage } from "@/components/media/smart-image";
+import { SmartImage } from "@/components/media/SmartImage";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
-import { CTACluster } from "@/components/layout/CTACluster";
 import { InlineNotice } from "@/components/layout/InlineNotice";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -33,26 +33,45 @@ const caseStudies = [
   }
 ];
 
+const outcomeFactors = [
+  "Baseline body profile and target area",
+  "Session plan and dosage strategy",
+  "Aftercare consistency",
+  "Review timing and staged treatment decisions"
+];
+
+const expectationRows = [
+  {
+    stage: "Early response",
+    timeline: "First week",
+    note: "Some expected short-term treatment response while aftercare is followed."
+  },
+  {
+    stage: "Gradual contour change",
+    timeline: "Weeks 2-4",
+    note: "Visible progression may appear gradually and differs by person."
+  },
+  {
+    stage: "Review checkpoint",
+    timeline: "Weeks 4-8",
+    note: "Progress is assessed and next steps are confirmed if suitable."
+  }
+];
+
 export default function ResultsPage() {
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Results"
-          subtext="Visual context and case-study style summaries to help set realistic consultation expectations."
-          title="Aqualyx Leeds Results"
-        />
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-          <div className="space-y-3 text-sm text-muted-foreground">
-            <p>
-              Results vary by person, area, baseline profile, and adherence to aftercare. This page is educational and
-              not a guarantee of outcome.
-            </p>
-            <CTACluster compact />
-          </div>
-          <ImageFrame alt="Results illustration" illustration="aqualyx" />
-        </div>
-      </Section>
+      <HeroShell
+        eyebrow="Results"
+        subline="Visual context and case-study style summaries to help set realistic consultation expectations."
+        title="Aqualyx Leeds Results"
+        typewriterPhrases={[
+          "Results vary by person and treatment area",
+          "Progress is reviewed over weeks, not overnight",
+          "Consultation confirms suitable treatment pathway"
+        ]}
+        visual={<ImageFrame alt="Results illustration" illustration="results" />}
+      />
 
       <Section>
         <SectionHeading title="Results gallery" />
@@ -71,6 +90,53 @@ export default function ResultsPage() {
           <InlineNotice>
             Gallery assets are informational visuals. Suitability and expected response are reviewed in consultation.
           </InlineNotice>
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading
+          eyebrow="Expectations"
+          subtext="Treatment outcomes are individual and no result can be guaranteed."
+          title="What results can look like"
+        />
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Card className="border-border/70 shadow-soft">
+            <CardHeader>
+              <CardTitle className="text-lg">What affects outcomes</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2 text-sm text-muted-foreground">
+              {outcomeFactors.map((factor) => (
+                <p key={factor}>• {factor}</p>
+              ))}
+            </CardContent>
+          </Card>
+          <Card className="border-border/70 shadow-soft">
+            <CardHeader>
+              <CardTitle className="text-lg">Realistic expectations table</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="overflow-hidden rounded-2xl border border-border/70">
+                <table className="w-full text-left text-sm">
+                  <thead className="bg-muted/50 text-xs uppercase tracking-wide text-muted-foreground">
+                    <tr>
+                      <th className="px-3 py-2">Stage</th>
+                      <th className="px-3 py-2">Typical timeline</th>
+                      <th className="px-3 py-2">Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {expectationRows.map((row) => (
+                      <tr className="border-t border-border/60" key={row.stage}>
+                        <td className="px-3 py-2 font-medium text-foreground">{row.stage}</td>
+                        <td className="px-3 py-2 text-muted-foreground">{row.timeline}</td>
+                        <td className="px-3 py-2 text-muted-foreground">{row.note}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </Section>
 
@@ -127,4 +193,3 @@ export default function ResultsPage() {
     </>
   );
 }
-

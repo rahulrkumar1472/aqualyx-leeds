@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { siteConfig } from "@/content/site";
 import { assets } from "@/content/assets";
 import {
+  articleSchema as buildArticleSchema,
   faqSchema as buildFaqSchema,
   localBusinessSchema as buildLocalBusinessSchema,
   serviceSchema as buildServiceSchema
@@ -59,4 +60,15 @@ export function serviceSchema(serviceName: string, path: string, description: st
 
 export function faqSchema(items: { question: string; answer: string }[]) {
   return buildFaqSchema(items);
+}
+
+export function articleSchema(args: {
+  headline: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  dateModified: string;
+  section: string;
+}) {
+  return buildArticleSchema(args);
 }

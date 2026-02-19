@@ -1,0 +1,11 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Aqualyx Leeds icon">
+  <defs>
+    <linearGradient id="aq-drop" x1="120" y1="96" x2="392" y2="416" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#63C2FF"/>
+      <stop offset="100%" stop-color="#193A60"/>
+    </linearGradient>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="128" fill="#F3FAFF" stroke="#CFE4F7" stroke-width="10"/>
+  <path d="M256 98C213 163 170 202 170 261C170 310 208 350 256 350C304 350 342 310 342 261C342 202 299 163 256 98Z" fill="url(#aq-drop)"/>
+  <path d="M132 372C167 342 209 328 256 328C303 328 345 342 380 372" stroke="#1F3A5F" stroke-width="18" stroke-linecap="round"/>
+</svg>

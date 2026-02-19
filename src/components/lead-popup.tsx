@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { siteConfig } from "@/content/site";
+import { trackEvent } from "@/lib/track";
 
 type LeadState = {
   name: string;
@@ -53,10 +54,22 @@ export function LeadPopup() {
     const timer = window.setTimeout(() => {
       setOpen(true);
       window.sessionStorage.setItem(SHOWN_KEY, "1");
+      trackEvent("popup_open", {
+        location: pathname
+      });
     }, 7000);
 
     return () => window.clearTimeout(timer);
   }, [pathname]);
+
+  useEffect(() => {
+    if (open) {
+      document.body.classList.add("popup-open");
+      return;
+    }
+    document.body.classList.remove("popup-open");
+    return () => document.body.classList.remove("popup-open");
+  }, [open]);
 
   useEffect(() => {
     function onOpenRequest() {
@@ -65,6 +78,10 @@ export function LeadPopup() {
       if (hasSubmittedBefore) return;
       setOpen(true);
       window.sessionStorage.setItem(SHOWN_KEY, "1");
+      trackEvent("popup_open", {
+        location: pathname,
+        source: "offer_strip"
+      });
     }
 
     window.addEventListener(OPEN_EVENT, onOpenRequest);
@@ -92,10 +109,17 @@ export function LeadPopup() {
 
       window.localStorage.setItem(SUBMITTED_KEY, "1");
       setSubmitted(true);
+      trackEvent("popup_submit", {
+        location: pathname
+      });
     } catch {
       // Keep UX resilient and direct users to WhatsApp if API fails.
       window.localStorage.setItem(SUBMITTED_KEY, "1");
       setSubmitted(true);
+      trackEvent("popup_submit", {
+        location: pathname,
+        fallback: true
+      });
     } finally {
       setLoading(false);
     }

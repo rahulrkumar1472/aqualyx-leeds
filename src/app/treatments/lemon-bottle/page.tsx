@@ -1,6 +1,6 @@
 import { TreatmentPageTemplate } from "@/components/treatment-page";
 import { FatDissolvingPricingBlock } from "@/components/sections/pricing-blocks";
-import { assetAt, assets } from "@/content/assets";
+import { getAsset } from "@/content/assets";
 import { treatments } from "@/content/treatments";
 import { buildMetadata } from "@/lib/seo";
 
@@ -17,7 +17,7 @@ export default function LemonBottlePage() {
     <TreatmentPageTemplate
       areas={treatment.areas}
       illustration="lemonBottle"
-      coverImage={assetAt(assets.treatments.lemonBottle, 0)}
+      coverImage={getAsset("treatments/lemon-bottle", "hero")}
       intro="Lemon Bottle in Leeds is offered as a supporting treatment pathway where clinically appropriate after consultation."
       pricingSection={<FatDissolvingPricingBlock />}
       pricingTeaser="Per-ml model with final cost confirmed after assessment."

@@ -46,9 +46,9 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/70 bg-background/94 backdrop-blur-xl">
-      <Container className="flex h-[72px] items-center justify-between gap-4">
+      <Container className="flex h-[76px] items-center justify-between gap-4">
         <Link className="flex items-center gap-2" href="/">
-          <Image alt="Aqualyx Leeds" height={38} src={assets.brand.logo} width={198} priority />
+          <Image alt="Aqualyx Leeds" height={42} src={assets.brand.logo} width={214} priority />
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">

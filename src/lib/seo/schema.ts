@@ -59,3 +59,44 @@ export function faqSchema(items: readonly FaqItem[]) {
     }))
   };
 }
+
+export function articleSchema({
+  headline,
+  description,
+  path,
+  datePublished,
+  dateModified,
+  section
+}: {
+  headline: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  dateModified: string;
+  section: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    description,
+    articleSection: section,
+    datePublished,
+    dateModified,
+    inLanguage: "en-GB",
+    author: {
+      "@type": "Organization",
+      name: siteConfig.name
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.siteUrl}/brand/logo.svg`
+      }
+    },
+    mainEntityOfPage: `${siteConfig.siteUrl}${path}`,
+    url: `${siteConfig.siteUrl}${path}`
+  };
+}

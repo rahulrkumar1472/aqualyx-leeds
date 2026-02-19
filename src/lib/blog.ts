@@ -16,8 +16,11 @@ export type BlogPost = {
   content: string;
   outline: string[];
   date: string;
+  updatedAt: string;
   readTime: string;
   category: string;
+  author: string;
+  reviewer: string;
   keyTakeaways: string[];
   faqs: BlogFaqItem[];
 };
@@ -60,8 +63,11 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
         const { data, content } = matter(source);
 
         const date = String(data.date ?? "");
+        const updatedAt = String(data.updatedAt ?? data.date ?? "");
         const readTime = String(data.readTime ?? "") || calculateReadTime(content);
         const category = String(data.category ?? "Aqualyx");
+        const author = String(data.author ?? "Aqualyx Leeds Editorial Team");
+        const reviewer = String(data.reviewer ?? "Clinically reviewed for suitability-safe guidance");
         const keyTakeaways = Array.isArray(data.keyTakeaways)
           ? data.keyTakeaways.map((item) => String(item)).filter(Boolean)
           : [];
@@ -73,8 +79,11 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
           content,
           outline: parseOutline(content),
           date,
+          updatedAt,
           readTime,
           category,
+          author,
+          reviewer,
           keyTakeaways,
           faqs: normalizeFaqs(data.faqs)
         };
@@ -91,4 +100,3 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
   const posts = await getAllBlogPosts();
   return posts.find((post) => post.slug === slug) ?? null;
 }
-

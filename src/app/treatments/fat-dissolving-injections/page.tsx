@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
@@ -19,17 +20,17 @@ export const metadata = buildMetadata({
 export default function FatDissolvingOverviewPage() {
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Injection Pathways"
-          subtext="Aqualyx is the primary pillar service, with Lemon Bottle available as a supporting option where suitable."
-          title="Fat Dissolving Injections in Leeds"
-        />
-        <div className="grid gap-6 lg:grid-cols-2">
-          <ImageFrame alt="Aqualyx illustration" illustration="aqualyx" />
-          <ImageFrame alt="Lemon Bottle illustration" illustration="lemonBottle" />
-        </div>
-      </Section>
+      <HeroShell
+        eyebrow="Injection Pathways"
+        subline="Aqualyx is the primary pillar service, with Lemon Bottle as a supporting option where suitable."
+        title="Fat Dissolving Injections in Leeds"
+        typewriterPhrases={[
+          "Consultation-led area planning before any treatment",
+          "Transparent per-ml pricing and realistic timelines",
+          "Book online or message us on WhatsApp"
+        ]}
+        visual={<ImageFrame alt="Fat dissolving treatment options" illustration="aqualyx" />}
+      />
 
       <Section>
         <SectionHeading actions={<CTACluster compact includeCall={false} />} title="Choose your treatment guide" />
@@ -88,4 +89,3 @@ export default function FatDissolvingOverviewPage() {
     </>
   );
 }
-

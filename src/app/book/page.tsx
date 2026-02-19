@@ -1,7 +1,6 @@
 import { ConsultationForm } from "@/components/booking/consultation-form";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
-import { SectionHeading } from "@/components/layout/SectionHeading";
-import { CTACluster } from "@/components/layout/CTACluster";
 import { InlineNotice } from "@/components/layout/InlineNotice";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { ImageFrame } from "@/components/media/ImageFrame";
@@ -27,21 +26,24 @@ export default function BookPage({
 }) {
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Booking"
-          subtext="Complete the steps to submit your request. We’ll confirm availability and suitability follow-up."
-          title="Book Free Consultation"
-        />
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-          <div className="space-y-3">
-            <CTACluster compact includeCall={false} />
-            <InlineNotice>
-              Consultation is required to confirm treatment suitability, dosage, and final pricing.
-            </InlineNotice>
-          </div>
-          <ImageFrame alt="Booking illustration" illustration="clinic" />
-        </div>
+      <HeroShell
+        eyebrow="Booking"
+        priceTeaser="Transparent pricing from £99 after assessment"
+        subline="Complete the steps to submit your request. We’ll confirm availability and suitability follow-up."
+        title="Book Free Consultation"
+        trustPills={["Leeds clinic (LS11)", "Consultation-led", "WhatsApp-first replies", "Results vary"]}
+        typewriterPhrases={[
+          "Consultation-led treatment planning in Leeds (LS11)",
+          "WhatsApp-friendly follow-up after your request",
+          "Secure your preferred date and time now"
+        ]}
+        visual={<ImageFrame alt="Booking illustration" illustration="clinic" />}
+      />
+
+      <Section className="pt-0">
+        <InlineNotice>
+          Consultation is required to confirm treatment suitability, dosage, and final pricing.
+        </InlineNotice>
       </Section>
 
       <Section>

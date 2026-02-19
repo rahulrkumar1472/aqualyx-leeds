@@ -2,17 +2,16 @@ import Script from "next/script";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { AlertTriangle, CheckCircle2, Clock3, MapPin, ShieldCheck } from "lucide-react";
-import { Typewriter } from "@/components/ui/typewriter";
 import { CTACluster } from "@/components/layout/CTACluster";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { InlineNotice } from "@/components/layout/InlineNotice";
-import { ProofRow } from "@/components/layout/ProofRow";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
+import { WhatsAppPanel } from "@/components/site/whatsapp-panel";
 import { ImageFrame } from "@/components/media/ImageFrame";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { siteConfig } from "@/content/site";
@@ -31,6 +30,7 @@ type TreatmentPageProps = {
   timeline: readonly string[];
   pricingTeaser: string;
   pricingSection: ReactNode;
+  comparisonSection?: ReactNode;
   relatedLinks: { href: string; label: string; description?: string }[];
 };
 
@@ -46,9 +46,16 @@ export function TreatmentPageTemplate({
   timeline,
   pricingTeaser,
   pricingSection,
+  comparisonSection,
   relatedLinks
 }: TreatmentPageProps) {
   const title = `${treatmentName} in Leeds`;
+  const atGlance = [
+    { label: "Consultation", value: "Required before treatment" },
+    { label: "Session window", value: "Typically 20-45 minutes" },
+    { label: "Downtime", value: "Usually minimal, varies by person" },
+    { label: "Pricing anchor", value: pricingTeaser.replace(" with final cost confirmed after assessment.", "") }
+  ];
 
   return (
     <>
@@ -73,24 +80,20 @@ export function TreatmentPageTemplate({
         type="application/ld+json"
       />
 
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <div className="grid items-center gap-7 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="space-y-5">
-            <Badge variant="secondary">Aqualyx Leeds</Badge>
-            <h1>{title}</h1>
-            <p className="text-base text-muted-foreground">{intro}</p>
-            <p className="text-sm font-semibold text-secondary">{pricingTeaser}</p>
-            <Typewriter
-              phrases={[
-                `${treatmentName} plans are tailored by area and suitability`,
-                "Consultation is required before treatment decisions",
-                "Progress is usually gradual over weeks and results vary",
-                "Book online or message us on WhatsApp for guidance"
-              ]}
-            />
-            <ProofRow items={["Leeds clinic (LS11)", "Consultation required", "Results vary", "Aftercare guidance"]} />
-            <CTACluster />
-          </div>
+      <HeroShell
+        ctaCluster={<CTACluster />}
+        eyebrow="Aqualyx Leeds"
+        priceTeaser={pricingTeaser}
+        subline={intro}
+        title={title}
+        trustPills={["Leeds clinic (LS11)", "Consultation required", "Results vary", "Aftercare guidance"]}
+        typewriterPhrases={[
+          `${treatmentName} plans are tailored by area and suitability`,
+          "Consultation is required before treatment decisions",
+          "Progress is usually gradual over weeks and results vary",
+          "Book online or message us on WhatsApp for guidance"
+        ]}
+        visual={
           <ImageFrame
             alt={`${treatmentName} in Leeds`}
             className="min-h-[300px]"
@@ -98,6 +101,19 @@ export function TreatmentPageTemplate({
             preferPhoto={false}
             src={coverImage}
           />
+        }
+      />
+
+      <Section className="pt-0">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {atGlance.map((item) => (
+            <Card className="border-border/70 shadow-soft" key={item.label}>
+              <CardContent className="space-y-1 p-4">
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">{item.label}</p>
+                <p className="text-sm font-semibold text-foreground">{item.value}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </Section>
 
@@ -137,12 +153,44 @@ export function TreatmentPageTemplate({
         </div>
       </Section>
 
+      <Section className="pt-0">
+        <div className="grid gap-4 lg:grid-cols-2">
+          <Card className="border-primary/20 bg-primary/5 shadow-soft">
+            <CardHeader>
+              <CardTitle className="text-lg">What you&apos;ll get in consultation</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2 text-sm text-muted-foreground">
+              <p>• Area-by-area suitability review and safety screening.</p>
+              <p>• Realistic timeline discussion with no guarantee claims.</p>
+              <p>• Per-area treatment planning and estimated pricing range.</p>
+              <p>• Clear aftercare and follow-up guidance.</p>
+            </CardContent>
+          </Card>
+          <Card className="border-border/70 shadow-soft">
+            <CardHeader>
+              <CardTitle className="text-lg">Who may need to avoid or defer</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2 text-sm text-muted-foreground">
+              <p>• Anyone with contraindications identified during screening.</p>
+              <p>• Clients seeking guaranteed or immediate body transformation.</p>
+              <p>• People requiring medical weight-management treatment instead.</p>
+              <p>• Anyone unable to follow aftercare or review recommendations.</p>
+            </CardContent>
+          </Card>
+        </div>
+      </Section>
+
       <Section variant="muted">
         <SectionHeading eyebrow="Treatment Areas" title="Areas often discussed in consultation" />
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {areas.map((area) => (
             <Card className="border-primary/15 bg-card/95 shadow-soft" key={area}>
-              <CardContent className="p-4 text-sm font-medium">{area}</CardContent>
+              <CardContent className="space-y-3 p-4 text-sm">
+                <p className="font-medium text-foreground">{area}</p>
+                <Button asChild size="sm" variant="outline">
+                  <Link href="/book">Book for this area</Link>
+                </Button>
+              </CardContent>
             </Card>
           ))}
         </div>
@@ -201,6 +249,8 @@ export function TreatmentPageTemplate({
         </InlineNotice>
       </Section>
 
+      {comparisonSection ? <Section>{comparisonSection}</Section> : null}
+
       <Section>
         <SectionHeading
           eyebrow="Safety"
@@ -237,6 +287,18 @@ export function TreatmentPageTemplate({
             </CardContent>
           </Card>
         </div>
+        <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            "Hydration and aftercare consistency",
+            "Avoid rushed treatment decisions",
+            "Use review points to assess progress",
+            "Message clinic promptly if concerned"
+          ].map((item) => (
+            <Card className="border-primary/15 bg-card/95 shadow-soft" key={item}>
+              <CardContent className="p-4 text-sm text-muted-foreground">{item}</CardContent>
+            </Card>
+          ))}
+        </div>
         <div className="mt-5">
           <CTACluster compact />
         </div>
@@ -244,12 +306,59 @@ export function TreatmentPageTemplate({
 
       <Section variant="muted">
         <SectionHeading eyebrow="Pricing" title="Pricing and quote guidance" />
+        <div className="mb-4 grid gap-3 md:grid-cols-3">
+          <Card className="border-border/70 shadow-soft">
+            <CardContent className="p-4 text-sm text-muted-foreground">
+              <p className="font-semibold text-foreground">Area size</p>
+              Larger areas usually need higher ml planning.
+            </CardContent>
+          </Card>
+          <Card className="border-border/70 shadow-soft">
+            <CardContent className="p-4 text-sm text-muted-foreground">
+              <p className="font-semibold text-foreground">Session count</p>
+              Staged treatment may be advised based on review.
+            </CardContent>
+          </Card>
+          <Card className="border-border/70 shadow-soft">
+            <CardContent className="p-4 text-sm text-muted-foreground">
+              <p className="font-semibold text-foreground">Clinical suitability</p>
+              Final plan is confirmed only after consultation.
+            </CardContent>
+          </Card>
+        </div>
+        <div className="mb-4 overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-muted/50 text-xs uppercase tracking-wide text-muted-foreground">
+              <tr>
+                <th className="px-4 py-3">Cost factor</th>
+                <th className="px-4 py-3">How it affects your quote</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-t border-border/60">
+                <td className="px-4 py-3 font-medium text-foreground">Target area size</td>
+                <td className="px-4 py-3 text-muted-foreground">Larger areas usually require higher planned ml.</td>
+              </tr>
+              <tr className="border-t border-border/60">
+                <td className="px-4 py-3 font-medium text-foreground">Session strategy</td>
+                <td className="px-4 py-3 text-muted-foreground">Staged sessions may be recommended for safer progression.</td>
+              </tr>
+              <tr className="border-t border-border/60">
+                <td className="px-4 py-3 font-medium text-foreground">Suitability review</td>
+                <td className="px-4 py-3 text-muted-foreground">Final plan is confirmed after in-person consultation.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         {pricingSection}
       </Section>
 
       <Section>
         <SectionHeading eyebrow="FAQs" title={`${treatmentName} in Leeds FAQs`} />
-        <FaqAccordion items={aqualyxFaqs} />
+        <div className="grid gap-4 lg:grid-cols-[1fr_320px]">
+          <FaqAccordion items={aqualyxFaqs} />
+          <WhatsAppPanel />
+        </div>
       </Section>
 
       <Section variant="gradient">

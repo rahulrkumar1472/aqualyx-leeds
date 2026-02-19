@@ -25,7 +25,7 @@ Generated files:
 - `/src/content/assets.ts`
 
 Runtime image component:
-- `/src/components/media/smart-image.tsx`
+- `/src/components/media/SmartImage.tsx`
 - `/src/components/media/ImageFrame.tsx` (illustration-first visual frame)
 - `/src/components/brand/Illustrations.tsx` (in-house SVG visual system)
 
@@ -35,7 +35,12 @@ Drop assets into:
 - `/public/images/treatments/aqualyx/`
 - `/public/images/treatments/lemon-bottle/`
 - `/public/images/treatments/fat-freezing/`
-- `/public/images/treatments/cavitation/`
+- `/public/images/treatments/ultrasound-cavitation/`
+- `/public/images/pricing/`
+- `/public/images/locations/`
+- `/public/images/blog/`
+- `/public/images/textures/backgrounds/`
+- `/public/images/clinic/`
 - `/public/images/results/`
 
 ## Local setup

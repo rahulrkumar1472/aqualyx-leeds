@@ -1,10 +1,9 @@
 import Link from "next/link";
 import Script from "next/script";
-import { ArrowUpRight, BadgeCheck, CheckCircle2, MapPin, ShieldCheck, Wallet } from "lucide-react";
-import { Typewriter } from "@/components/ui/typewriter";
+import { Award, CheckCircle2, Clock3, MapPin, ShieldCheck, Wallet } from "lucide-react";
 import { CTACluster } from "@/components/layout/CTACluster";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { InlineNotice } from "@/components/layout/InlineNotice";
-import { ProofRow } from "@/components/layout/ProofRow";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
@@ -12,7 +11,8 @@ import { ReviewsSection } from "@/components/sections/reviews-section";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
-import { Badge } from "@/components/ui/badge";
+import { ComparisonTable } from "@/components/ui/comparison-table";
+import { IconBadge } from "@/components/ui/icon-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { aqualyxFaqs, generalFaqs } from "@/content/faqs";
@@ -37,7 +37,7 @@ const goalCards = [
     body: "Plan targeted contouring for submental fullness after a suitability check."
   },
   {
-    title: "Stomach",
+    title: "Lower abdomen",
     body: "Assess localised abdominal fat pockets and build a realistic session strategy."
   },
   {
@@ -45,8 +45,16 @@ const goalCards = [
     body: "Treat flank areas with dosage planning based on body profile and goals."
   },
   {
-    title: "Arms and thighs",
-    body: "Set phased treatment goals with monitoring and practical aftercare."
+    title: "Upper arms",
+    body: "Review arm contour goals and expected treatment staging."
+  },
+  {
+    title: "Thighs",
+    body: "Set realistic timeline expectations for inner and outer thigh areas."
+  },
+  {
+    title: "Jawline detail",
+    body: "Discuss dose planning around jawline shape and treatment goals."
   }
 ];
 
@@ -64,38 +72,91 @@ const steps = [
     body: "You receive straightforward aftercare instructions and what to monitor in the first week."
   },
   {
-    title: "Review and next steps",
+    title: "Review and progression",
     body: "Progress is assessed and your next appointment is adjusted if clinically appropriate."
   }
 ];
 
-const comparison = [
+const comparisonRows = [
   {
-    name: "Aqualyx",
-    goodFor: "Targeted stubborn fat areas",
-    approach: "Injection-based",
-    cadence: "Planned sessions",
-    page: "/treatments/aqualyx"
+    feature: "Best fit",
+    aqualyx: "Targeted stubborn fat pockets by area",
+    alternatives: "Depends on modality and area profile"
   },
   {
-    name: "Fat Freezing",
-    goodFor: "Pinchable surface fat",
-    approach: "Cooling applicators",
-    cadence: "Package-led",
-    page: "/treatments/fat-freezing"
+    feature: "Treatment style",
+    aqualyx: "Injection-based consultation pathway",
+    alternatives: "Cooling or ultrasound session pathways"
   },
   {
-    name: "Cavitation",
-    goodFor: "Non-injection body contour support",
-    approach: "Ultrasound sessions",
-    cadence: "Series-based",
-    page: "/treatments/ultrasound-cavitation"
+    feature: "Timeline profile",
+    aqualyx: "Gradual progress over planned review windows",
+    alternatives: "Also gradual, with modality-specific response"
+  },
+  {
+    feature: "Planning approach",
+    aqualyx: "Per-area dosage and suitability review",
+    alternatives: "Package/session recommendations by suitability"
   }
+];
+
+const safetyCards = [
+  {
+    title: "Who it may suit",
+    points: [
+      "Adults near goal weight with localised fat pockets",
+      "Clients seeking targeted contour support, not weight-loss treatment",
+      "People able to follow aftercare and attend review appointments"
+    ]
+  },
+  {
+    title: "Who needs medical review",
+    points: [
+      "Anyone with relevant medical history flagged at consultation",
+      "People expecting instant or guaranteed transformation",
+      "Anyone unsure whether injections are the right treatment route"
+    ]
+  },
+  {
+    title: "Why consultation is required",
+    points: [
+      "To confirm suitability and contraindications",
+      "To estimate dosage range by area",
+      "To set realistic timeline and aftercare guidance"
+    ]
+  }
+];
+
+const expectationRows = [
+  {
+    notice: "Early treatment response",
+    timeline: "First week",
+    notes: "Area may feel different while aftercare guidance is followed."
+  },
+  {
+    notice: "Gradual contour changes",
+    timeline: "Weeks 2-4",
+    notes: "Many clients notice progressive visible change over this period."
+  },
+  {
+    notice: "Review and planning",
+    timeline: "Weeks 4-8",
+    notes: "Progress is reviewed and next steps are confirmed if suitable."
+  }
+];
+
+const whyChooseCards = [
+  "Leeds clinic at LS11 location",
+  "Transparent pricing model from £99 per ml",
+  "Consultation-led treatment planning",
+  "WhatsApp-first support for quick answers",
+  "Structured aftercare and review guidance",
+  "Flexible booking flow with fast follow-up"
 ];
 
 export default async function HomePage() {
   const posts = await getAllBlogPosts();
-  const featuredPosts = posts.slice(0, 3);
+  const featuredPosts = posts.slice(0, 6);
 
   return (
     <>
@@ -105,49 +166,27 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema(homeFaqs)) }}
       />
 
-      <Section className="pt-10 sm:pt-14" containerClassName="relative overflow-hidden rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <div className="absolute -right-20 -top-24 h-64 w-64 rounded-full bg-primary/18 blur-3xl" />
-        <div className="absolute -left-20 bottom-0 h-44 w-44 rounded-full bg-accent/60 blur-3xl" />
-        <div className="absolute right-6 top-6 hidden h-36 w-36 rounded-full border border-primary/25 bg-primary/10 lg:block" />
-        <div className="relative space-y-6">
-          <div className="space-y-5">
-            <Badge className="rounded-full px-3 py-1" variant="secondary">
-              Aqualyx Leeds
-            </Badge>
-            <h1 className="max-w-4xl">Aqualyx Fat Dissolving Injections in Leeds</h1>
-            <p className="lead text-[1.08rem]">Spot-fat reduction • Transparent pricing • Free consultation</p>
-            <p className="text-sm font-semibold text-secondary">From {pricingConfig.fatDissolving.pricePerMl} per ml</p>
-            <div className="max-w-2xl">
-              <Typewriter
-                phrases={[
-                  "Target stubborn areas like chin, jawline, stomach & love handles",
-                  "Clinically guided treatment plans — consultation required",
-                  "Fast, visible progress over weeks — results vary",
-                  "Book online or message us on WhatsApp"
-                ]}
-              />
-            </div>
-            <CTACluster />
-            <div className="flex flex-wrap items-center gap-3 text-xs text-secondary">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border/75 bg-card/75 px-3 py-1.5">
-                <MapPin className="h-3.5 w-3.5 text-primary" />
-                Leeds clinic (LS11)
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border/75 bg-card/75 px-3 py-1.5">
-                <Wallet className="h-3.5 w-3.5 text-primary" />
-                Transparent pricing
-              </span>
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-border/75 bg-card/75 px-3 py-1.5">
-                <BadgeCheck className="h-3.5 w-3.5 text-primary" />
-                Free consultation
-              </span>
-            </div>
-            <ProofRow items={["Results vary", "Consultation required", "No downtime*"]} />
-            <p className="text-xs text-muted-foreground">*Downtime varies by person.</p>
-          </div>
-          <div className="pointer-events-none absolute -bottom-10 right-8 hidden w-44 opacity-80 lg:block">
-            <ImageFrame alt="Aqualyx motif" className="min-h-[170px]" illustration="aqualyx" />
-          </div>
+      <HeroShell
+        ctaCluster={<CTACluster />}
+        eyebrow="Aqualyx Leeds"
+        footnote="*Downtime varies by person."
+        priceTeaser={`From ${pricingConfig.fatDissolving.pricePerMl} per ml`}
+        subline="Consultation-led spot-fat reduction with transparent pricing."
+        title="Aqualyx Fat Dissolving Injections in Leeds"
+        typewriterPhrases={[
+          "Target stubborn areas like chin, jawline, stomach & love handles",
+          "Clinically guided treatment plans — consultation required",
+          "Fast, visible progress over weeks — results vary",
+          "Book online or message us on WhatsApp"
+        ]}
+        visual={<ImageFrame alt="Aqualyx hero visual" className="min-h-[300px]" illustration="heroAbstract" />}
+      />
+
+      <Section className="pt-0">
+        <div className="flex flex-wrap gap-2.5">
+          <IconBadge icon={<Award className="h-3.5 w-3.5" />} label="Trusted consultation pathway" />
+          <IconBadge icon={<Clock3 className="h-3.5 w-3.5" />} label="Fast WhatsApp replies" />
+          <IconBadge icon={<Wallet className="h-3.5 w-3.5" />} label="Transparent pricing from £99" />
         </div>
       </Section>
 
@@ -243,6 +282,14 @@ export default async function HomePage() {
                   </tbody>
                 </table>
               </div>
+              <div className="rounded-2xl border border-border/70 bg-card/85 p-3">
+                <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-foreground">Why ranges vary</p>
+                <ul className="space-y-1.5 text-xs text-muted-foreground">
+                  <li>• Area size and fat distribution differ by person.</li>
+                  <li>• Suitability review can change final session strategy.</li>
+                  <li>• Staged treatment may be recommended for safer progression.</li>
+                </ul>
+              </div>
               <CTACluster compact includeCall={false} />
               <p className="text-xs">{pricingConfig.fatDissolving.disclaimer}</p>
             </CardContent>
@@ -292,28 +339,73 @@ export default async function HomePage() {
           subtext="Different modalities suit different goals, anatomy, and timelines. Consultation decides the best route for you."
           title="Aqualyx vs non-invasive options"
         />
+        <ComparisonTable rows={comparisonRows} />
+        <div className="mt-3 text-xs text-muted-foreground">
+          Informational comparison only. Suitability and treatment route are confirmed in consultation.
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading
+          eyebrow="Safety & Suitability"
+          subtext="Consultation-led safety checks guide all recommendations. Information here is general and does not replace clinical assessment."
+          title="Who treatment may suit"
+        />
         <div className="grid gap-4 md:grid-cols-3">
-          {comparison.map((item) => (
-            <Card className="border-border/70 bg-card/85 shadow-soft" key={item.name}>
+          {safetyCards.map((card) => (
+            <Card className="border-border/70 shadow-soft" key={card.title}>
               <CardHeader>
-                <CardTitle>{item.name}</CardTitle>
+                <CardTitle className="text-lg">{card.title}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-2 text-sm text-muted-foreground">
-                <p>
-                  <strong className="text-foreground">Best for:</strong> {item.goodFor}
-                </p>
-                <p>
-                  <strong className="text-foreground">Approach:</strong> {item.approach}
-                </p>
-                <p>
-                  <strong className="text-foreground">Typical cadence:</strong> {item.cadence}
-                </p>
-                <Link
-                  className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
-                  href={item.page}
-                >
-                  Compare details <ArrowUpRight className="h-4 w-4" />
-                </Link>
+                {card.points.map((point) => (
+                  <p className="inline-flex items-start gap-2" key={point}>
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
+                    {point}
+                  </p>
+                ))}
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section variant="muted">
+        <SectionHeading
+          eyebrow="Results"
+          subtext="No clinic can promise identical outcomes for everyone. Progress depends on area, baseline profile, and aftercare."
+          title="Results and expectations"
+        />
+        <div className="overflow-hidden rounded-[1.6rem] border border-border/70 bg-card shadow-soft">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-muted/50 text-xs uppercase tracking-wide text-muted-foreground">
+              <tr>
+                <th className="px-4 py-3">What you might notice</th>
+                <th className="px-4 py-3">Typical timeline</th>
+                <th className="px-4 py-3">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              {expectationRows.map((row) => (
+                <tr className="border-t border-border/60" key={row.notice}>
+                  <td className="px-4 py-3 font-medium text-foreground">{row.notice}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{row.timeline}</td>
+                  <td className="px-4 py-3 text-muted-foreground">{row.notes}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Section>
+
+      <Section>
+        <SectionHeading eyebrow="Trust" title="Why book with Aqualyx Leeds" />
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {whyChooseCards.map((item) => (
+            <Card className="border-border/70 shadow-soft" key={item}>
+              <CardContent className="inline-flex items-start gap-2 p-4 text-sm text-muted-foreground">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 text-primary" />
+                {item}
               </CardContent>
             </Card>
           ))}
@@ -335,7 +427,7 @@ export default async function HomePage() {
           subtext="Customer-friendly guides on suitability, pricing, timelines, and treatment comparisons."
           title="Featured articles"
         />
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {featuredPosts.map((post) => (
             <Card className="border-border/70 bg-card/85 shadow-soft" key={post.slug}>
               <CardHeader>

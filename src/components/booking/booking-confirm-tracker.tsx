@@ -9,12 +9,12 @@ type BookingConfirmTrackerProps = {
 
 export function BookingConfirmTracker({ reference }: BookingConfirmTrackerProps) {
   useEffect(() => {
-    trackEvent("lead_submit_success", {
+    trackEvent("booking_submit", {
       location: "book_confirm",
+      status: "success",
       reference
     });
   }, [reference]);
 
   return null;
 }
-

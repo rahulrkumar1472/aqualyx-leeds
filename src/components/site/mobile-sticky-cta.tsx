@@ -8,7 +8,10 @@ import { trackEvent } from "@/lib/track";
 
 export function MobileStickyCta() {
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border/80 bg-background/95 px-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-2.5 backdrop-blur md:hidden">
+    <div
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-border/80 bg-background/95 px-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-2.5 backdrop-blur md:hidden"
+      style={{ minHeight: "var(--mobile-cta-h)" }}
+    >
       <div className="mx-auto grid max-w-md grid-cols-3 gap-2">
         <Button asChild>
           <Link
@@ -19,7 +22,7 @@ export function MobileStickyCta() {
               })
             }
           >
-            Book Free Consultation
+            Book
           </Link>
         </Button>
         <Button asChild variant="ctaSecondary">

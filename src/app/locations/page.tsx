@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
 import { nearLeedsAreas } from "@/content/locations";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
-import { CTACluster } from "@/components/layout/CTACluster";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
@@ -18,17 +18,17 @@ export const metadata = buildMetadata({
 export default function LocationsHubPage() {
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Location Hub"
-          subtext="Treatment is delivered at the LS11 clinic, with local support pages for nearby areas around Leeds."
-          title="Aqualyx Leeds Locations"
-        />
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-          <CTACluster compact />
-          <ImageFrame alt="Leeds location illustration" illustration="clinic" />
-        </div>
-      </Section>
+      <HeroShell
+        eyebrow="Location Hub"
+        subline="Treatment is delivered at the LS11 clinic, with local support pages for nearby areas around Leeds."
+        title="Aqualyx Leeds Locations"
+        typewriterPhrases={[
+          "One Leeds clinic serving surrounding areas",
+          "Directions, transport notes, and local booking routes",
+          "WhatsApp-first support for quick local queries"
+        ]}
+        visual={<ImageFrame alt="Leeds location illustration" illustration="locationMap" />}
+      />
 
       <Section>
         <SectionHeading title="Primary location pages" />
@@ -104,4 +104,3 @@ export default function LocationsHubPage() {
     </>
   );
 }
-

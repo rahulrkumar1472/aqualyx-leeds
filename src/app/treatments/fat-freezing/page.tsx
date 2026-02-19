@@ -1,6 +1,6 @@
 import { TreatmentPageTemplate } from "@/components/treatment-page";
 import { FatFreezingPricingBlock } from "@/components/sections/pricing-blocks";
-import { assetAt, assets } from "@/content/assets";
+import { getAsset } from "@/content/assets";
 import { pricingConfig } from "@/content/pricing";
 import { treatments } from "@/content/treatments";
 import { buildMetadata } from "@/lib/seo";
@@ -18,7 +18,7 @@ export default function FatFreezingPage() {
     <TreatmentPageTemplate
       areas={treatment.areas}
       illustration="fatFreezing"
-      coverImage={assetAt(assets.treatments.fatFreezing, 0)}
+      coverImage={getAsset("treatments/fat-freezing", "hero")}
       intro="Fat Freezing (Cryolipolysis) in Leeds is designed for non-invasive contour support with package-led pricing and consultation planning."
       pricingSection={<FatFreezingPricingBlock />}
       pricingTeaser={`Packages from £${pricingConfig.fatFreezingPackages[0].priceGbp} with bundled treatment extras on selected plans.`}

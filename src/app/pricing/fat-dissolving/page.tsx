@@ -2,6 +2,8 @@ import { FatDissolvingPricingBlock } from "@/components/sections/pricing-blocks"
 import { FaqAccordion } from "@/components/sections/faq-accordion";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
+import { WhatsAppPanel } from "@/components/site/whatsapp-panel";
+import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
@@ -18,20 +20,26 @@ export const metadata = buildMetadata({
 export default function FatDissolvingPricingPage() {
   return (
     <>
-      <Section className="pt-10 sm:pt-14" containerClassName="rounded-[2rem] border border-primary/20 bg-card/85 p-6 shadow-soft sm:p-10" variant="gradient">
-        <SectionHeading
-          eyebrow="Per-ml Guide"
-          subtext="Guide pricing for educational planning. Final cost is confirmed after in-person suitability assessment."
-          title="Fat Dissolving Pricing in Leeds"
-        />
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr] lg:items-end">
-          <CTACluster compact />
-          <ImageFrame alt="Aqualyx pricing illustration" illustration="aqualyx" />
-        </div>
-      </Section>
+      <HeroShell
+        ctaCluster={<CTACluster compact />}
+        eyebrow="Per-ml Guide"
+        priceTeaser="From £99 per ml"
+        subline="Guide pricing for educational planning. Final cost is confirmed after in-person suitability assessment."
+        title="Fat Dissolving Pricing in Leeds"
+        typewriterPhrases={[
+          "Price is confirmed after area and suitability review.",
+          "Transparent per-ml model with typical range guidance.",
+          "Message us on WhatsApp for quick quote support."
+        ]}
+        visual={<ImageFrame alt="Aqualyx pricing illustration" illustration="pricing" />}
+      />
 
       <Section>
         <FatDissolvingPricingBlock />
+      </Section>
+
+      <Section className="pt-0">
+        <WhatsAppPanel title="Need a dosage estimate first?" />
       </Section>
 
       <Section variant="muted">
@@ -68,4 +76,3 @@ export default function FatDissolvingPricingPage() {
     </>
   );
 }
-

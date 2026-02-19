@@ -25,6 +25,7 @@
   --input: 206 34% 86%;
   --ring: 201 86% 64%;
   --radius: 1.25rem;
+  --mobile-cta-h: 74px;
 }
 
 * {
@@ -39,6 +40,7 @@ body {
     radial-gradient(circle at 100% 0%, hsl(var(--primary) / 0.1), transparent 44%),
     radial-gradient(circle at 0% 100%, hsl(var(--accent) / 0.38), transparent 56%);
   line-height: 1.62;
+  overflow-x: clip;
 }
 
 h1,
@@ -52,11 +54,11 @@ h6 {
 }
 
 h1 {
-  @apply text-balance text-[2.45rem] font-semibold leading-[1.04] tracking-[-0.03em] md:text-[4.15rem];
+  @apply text-balance text-[2.6rem] font-semibold leading-[1.01] tracking-[-0.032em] md:text-[4.35rem];
 }
 
 h2 {
-  @apply text-balance text-[1.95rem] font-semibold leading-[1.1] tracking-[-0.024em] md:text-[2.9rem];
+  @apply text-balance text-[2.1rem] font-semibold leading-[1.08] tracking-[-0.026em] md:text-[3.05rem];
 }
 
 h3 {
@@ -69,6 +71,109 @@ p {
 
 main {
   @apply min-h-screen;
+  padding-bottom: clamp(0.5rem, 1.2vw, 1.25rem);
+}
+
+@media (max-width: 767px) {
+  main {
+    padding-bottom: calc(var(--mobile-cta-h) + env(safe-area-inset-bottom) + 24px);
+  }
+}
+
+.bg-noise-overlay {
+  position: relative;
+  isolation: isolate;
+}
+
+.bg-noise-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(hsl(var(--secondary) / 0.045) 0.4px, transparent 0.4px);
+  background-size: 3px 3px;
+  pointer-events: none;
+  opacity: 0.25;
+}
+
+.reveal-section {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-shell::before {
+  content: "";
+  position: absolute;
+  inset: -20% -15% auto -15%;
+  height: 70%;
+  background:
+    radial-gradient(circle at 14% 12%, hsl(var(--primary) / 0.36), transparent 52%),
+    radial-gradient(circle at 86% 6%, hsl(var(--secondary) / 0.16), transparent 46%),
+    radial-gradient(circle at 56% 68%, hsl(var(--accent) / 0.72), transparent 56%);
+  pointer-events: none;
+  animation: hero-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes hero-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(0, 10px, 0) scale(1.03);
+  }
+}
+
+.glass-surface {
+  background: linear-gradient(160deg, hsl(var(--background) / 0.88), hsl(var(--background) / 0.7));
+  border: 1px solid hsl(var(--border) / 0.72);
+  box-shadow:
+    0 10px 28px hsl(var(--secondary) / 0.1),
+    inset 0 1px 0 hsl(var(--background) / 0.95);
+  backdrop-filter: blur(8px);
+}
+
+.luxury-pill {
+  border: 1px solid hsl(var(--border) / 0.7);
+  background: linear-gradient(140deg, hsl(var(--background) / 0.82), hsl(var(--muted) / 0.68));
+  box-shadow: 0 6px 18px hsl(var(--secondary) / 0.08);
+}
+
+.typewriter-pill {
+  display: inline-flex;
+  width: 100%;
+  max-width: 42rem;
+  min-height: 2.25rem;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid hsl(var(--primary) / 0.28);
+  background: linear-gradient(130deg, hsl(var(--primary) / 0.12), hsl(var(--background) / 0.78));
+  padding: 0.4rem 0.85rem;
+}
+
+.offer-strip-copy {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.whatsapp-float {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+body.popup-open .whatsapp-float {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
 }
 
 .bg-hero-mesh {
