@@ -10,6 +10,7 @@ import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAsset } from "@/content/assets";
 
 export const metadata = buildMetadata({
   title: "Fat Dissolving Injections Leeds",
@@ -29,7 +30,14 @@ export default function FatDissolvingOverviewPage() {
           "Transparent per-ml pricing and realistic timelines",
           "Book online or message us on WhatsApp"
         ]}
-        visual={<ImageFrame alt="Fat dissolving treatment options" illustration="aqualyx" />}
+        visual={
+          <ImageFrame
+            alt="Fat dissolving treatment options"
+            illustration="aqualyx"
+            preferPhoto
+            src={getAsset("treatments/aqualyx", "hero")}
+          />
+        }
       />
 
       <Section>

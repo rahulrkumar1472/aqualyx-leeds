@@ -3,6 +3,7 @@ import { Typewriter } from "@/components/ui/typewriter";
 import { CTAActions } from "@/components/site/cta-actions";
 import { ProofRow } from "@/components/layout/ProofRow";
 import { Section } from "@/components/layout/Section";
+import { siteConfig } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 type HeroShellProps = {
@@ -26,10 +27,16 @@ export function HeroShell({
   priceTeaser,
   visual,
   ctaCluster,
-  trustPills = ["Leeds clinic (LS11)", "Transparent pricing", "Consultation-led", "WhatsApp replies"],
+  trustPills,
   footnote,
   className
 }: HeroShellProps) {
+  const defaultTrustPills = [
+    siteConfig.localClinicClaim,
+    "Transparent pricing",
+    "Consultation-led",
+    "Results vary"
+  ];
   return (
     <Section
       className={cn("pt-10 sm:pt-14", className)}
@@ -46,7 +53,7 @@ export function HeroShell({
             <Typewriter phrases={typewriterPhrases} />
           </div>
           {ctaCluster ?? <CTAActions trackingLocation="hero_shell" />}
-          <ProofRow items={trustPills} />
+          <ProofRow items={trustPills?.length ? trustPills : defaultTrustPills} />
           {footnote ? <p className="text-xs text-muted-foreground">{footnote}</p> : null}
         </div>
         {visual ? <div className="relative">{visual}</div> : null}

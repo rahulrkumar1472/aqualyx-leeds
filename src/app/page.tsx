@@ -15,6 +15,7 @@ import { ComparisonTable } from "@/components/ui/comparison-table";
 import { IconBadge } from "@/components/ui/icon-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAsset } from "@/content/assets";
 import { aqualyxFaqs, generalFaqs } from "@/content/faqs";
 import { pricingConfig } from "@/content/pricing";
 import { siteConfig } from "@/content/site";
@@ -179,7 +180,15 @@ export default async function HomePage() {
           "Fast, visible progress over weeks — results vary",
           "Book online or message us on WhatsApp"
         ]}
-        visual={<ImageFrame alt="Aqualyx hero visual" className="min-h-[300px]" illustration="heroAbstract" />}
+        visual={
+          <ImageFrame
+            alt="Aqualyx hero visual"
+            className="min-h-[300px]"
+            illustration="heroAbstract"
+            preferPhoto
+            src={getAsset("hero", "hero")}
+          />
+        }
       />
 
       <Section className="pt-0">
@@ -431,6 +440,13 @@ export default async function HomePage() {
           {featuredPosts.map((post) => (
             <Card className="border-border/70 bg-card/85 shadow-soft" key={post.slug}>
               <CardHeader>
+                <ImageFrame
+                  alt={post.title}
+                  className="mb-2 min-h-[160px]"
+                  illustration="blog"
+                  preferPhoto
+                  src={getAsset("blog", "gallery", featuredPosts.indexOf(post))}
+                />
                 <p className="text-xs font-semibold uppercase tracking-wide text-primary">{post.category}</p>
                 <CardTitle className="text-lg leading-snug">{post.title}</CardTitle>
               </CardHeader>

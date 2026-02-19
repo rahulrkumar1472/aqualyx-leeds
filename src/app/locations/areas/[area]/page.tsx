@@ -4,6 +4,7 @@ import { nearLeedsAreas } from "@/content/locations";
 import { buildMetadata } from "@/lib/seo";
 import { availabilityConfig } from "@/content/availability";
 import { siteConfig } from "@/content/site";
+import { getAsset } from "@/content/assets";
 import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
@@ -60,7 +61,7 @@ export default function AreaLocationPage({ params }: { params: { area: string } 
           "Consultation-led pathway with transparent pricing",
           "Book online or message us on WhatsApp"
         ]}
-        visual={<ImageFrame alt={`Aqualyx in ${area.name}`} illustration="locationMap" />}
+        visual={<ImageFrame alt={`Aqualyx in ${area.name}`} illustration="locationMap" preferPhoto src={getAsset("locations", "gallery", 3)} />}
       />
 
       <Section className="pt-0">

@@ -9,6 +9,7 @@ import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAsset } from "@/content/assets";
 
 export const metadata = buildMetadata({
   title: "Non-invasive Fat Reduction Leeds",
@@ -28,7 +29,14 @@ export default function NonInvasiveOverviewPage() {
           "Consultation confirms what may suit your goals",
           "Quick WhatsApp guidance before booking"
         ]}
-        visual={<ImageFrame alt="Non-invasive fat reduction options" illustration="fatFreezing" />}
+        visual={
+          <ImageFrame
+            alt="Non-invasive fat reduction options"
+            illustration="fatFreezing"
+            preferPhoto
+            src={getAsset("treatments/fat-freezing", "hero")}
+          />
+        }
       />
 
       <Section>

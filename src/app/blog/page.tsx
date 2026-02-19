@@ -4,6 +4,8 @@ import { Section } from "@/components/layout/Section";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
+import { assetAt, assets, getAsset } from "@/content/assets";
+import { blogContentConfig } from "@/content/blog";
 import { buildMetadata } from "@/lib/seo";
 import { getAllBlogPosts } from "@/lib/blog";
 
@@ -16,6 +18,10 @@ export const metadata = buildMetadata({
 
 export default async function BlogPage() {
   const posts = await getAllBlogPosts();
+  const featured = blogContentConfig.featuredSlugs
+    .map((slug) => posts.find((post) => post.slug === slug))
+    .filter((item): item is NonNullable<typeof item> => Boolean(item));
+  const ordered = [...featured, ...posts.filter((post) => !featured.some((item) => item.slug === post.slug))];
 
   return (
     <>
@@ -30,7 +36,7 @@ export default async function BlogPage() {
           "Leeds-focused pricing, safety, and suitability articles",
           "Book or WhatsApp directly from any guide"
         ]}
-        visual={<ImageFrame alt="Aqualyx Leeds blog" illustration="blog" />}
+        visual={<ImageFrame alt="Aqualyx Leeds blog" illustration="blog" preferPhoto src={getAsset("blog", "hero")} />}
       />
 
       <Section className="pt-0">
@@ -42,13 +48,14 @@ export default async function BlogPage() {
 
       <Section>
         <BlogIndex
-          posts={posts.map((post) => ({
+          posts={ordered.map((post, index) => ({
             title: post.title,
             slug: post.slug,
             description: post.description,
             readTime: post.readTime,
             date: post.date,
-            category: post.category
+            category: post.category,
+            image: assetAt(assets.categories.blog?.gallery ?? [], index, getAsset("blog", "hero"))
           }))}
         />
       </Section>

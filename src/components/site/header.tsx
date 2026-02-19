@@ -21,9 +21,12 @@ import { trackEvent } from "@/lib/track";
 
 const pricingLinks = [
   { title: "Prices Hub", href: "/prices" },
+  { title: "Aqualyx Pricing", href: "/pricing/aqualyx" },
+  { title: "Lemon Bottle Pricing", href: "/pricing/lemon-bottle" },
   { title: "Fat Dissolving (per ml)", href: "/pricing/fat-dissolving" },
   { title: "Fat Freezing Packages", href: "/pricing/fat-freezing" },
-  { title: "Cavitation", href: "/pricing/cavitation" }
+  { title: "Cavitation", href: "/pricing/cavitation" },
+  { title: "Ultrasound Cavitation Pricing", href: "/pricing/ultrasound-cavitation" }
 ];
 
 const locationLinks = [
@@ -35,6 +38,7 @@ const mobileLinks = [
   { title: "Treatments", href: "/treatments" },
   { title: "Pricing", href: "/pricing" },
   { title: "Results", href: "/results" },
+  { title: "Case Studies", href: "/case-studies" },
   { title: "FAQs", href: "/faqs" },
   { title: "Locations", href: "/locations" },
   { title: "Blog", href: "/blog" },
@@ -93,6 +97,11 @@ export function Header() {
           <Link href="/results">
             <Button className={navButtonClass} variant="ghost">
               Results
+            </Button>
+          </Link>
+          <Link href="/case-studies">
+            <Button className={navButtonClass} variant="ghost">
+              Case Studies
             </Button>
           </Link>
           <Link href="/faqs">

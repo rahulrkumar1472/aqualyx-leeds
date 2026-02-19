@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/layout/SectionHeading";
 import { InlineNotice } from "@/components/layout/InlineNotice";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { assets, assetAt } from "@/content/assets";
+import { assets, assetAt, getAsset } from "@/content/assets";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -70,7 +70,7 @@ export default function ResultsPage() {
           "Progress is reviewed over weeks, not overnight",
           "Consultation confirms suitable treatment pathway"
         ]}
-        visual={<ImageFrame alt="Results illustration" illustration="results" />}
+        visual={<ImageFrame alt="Results illustration" illustration="results" preferPhoto src={getAsset("results", "hero")} />}
       />
 
       <Section>

@@ -4,7 +4,7 @@ export const treatments = {
     slug: "aqualyx",
     category: "Fat Dissolving Injections",
     short: "Targeted fat dissolving injections for stubborn pockets of fat.",
-    areas: ["Chin", "Jawline", "Arms", "Abdomen", "Flanks", "Thighs"],
+    areas: ["Double chin", "Jawline", "Lower stomach", "Love handles", "Arms", "Back fat"],
     suitability: [
       "Adults near goal weight with localised fat pockets",
       "Patients seeking non-surgical contouring",

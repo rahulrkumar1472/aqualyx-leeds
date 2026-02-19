@@ -9,6 +9,7 @@ import { MobileStickyCta } from "@/components/site/mobile-sticky-cta";
 import { OfferStrip } from "@/components/site/offer-strip";
 import { RevealObserver } from "@/components/site/reveal-observer";
 import { SitewideFinalCta } from "@/components/site/sitewide-final-cta";
+import { TrustStrip } from "@/components/site/trust-strip";
 import { WhatsAppFloat } from "@/components/site/whatsapp-float";
 import { LeadPopup } from "@/components/lead-popup";
 import { siteConfig } from "@/content/site";
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         />
         <OfferStrip />
         <Header />
+        <TrustStrip />
         <RevealObserver />
         <Breadcrumbs />
         <PageShell>{children}</PageShell>

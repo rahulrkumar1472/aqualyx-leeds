@@ -8,6 +8,7 @@ import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { CTACluster } from "@/components/layout/CTACluster";
 import { ImageFrame } from "@/components/media/ImageFrame";
+import { getAsset } from "@/content/assets";
 import { pricingFaqs } from "@/content/faqs";
 import { buildMetadata } from "@/lib/seo";
 
@@ -31,7 +32,7 @@ export default function CavitationPricingPage() {
           "Compare package structure before booking.",
           "Chat on WhatsApp for quick plan guidance."
         ]}
-        visual={<ImageFrame alt="Cavitation pricing illustration" illustration="pricing" />}
+        visual={<ImageFrame alt="Cavitation pricing illustration" illustration="pricing" preferPhoto src={getAsset("pricing", "gallery", 2)} />}
       />
 
       <Section>

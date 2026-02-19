@@ -11,6 +11,7 @@ import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAsset } from "@/content/assets";
 
 export const metadata = buildMetadata({
   title: "Treatments in Leeds",
@@ -30,7 +31,7 @@ export default function TreatmentsOverviewPage() {
           "Consultation confirms suitability and realistic timeline",
           "Book online or WhatsApp us for fast guidance"
         ]}
-        visual={<ImageFrame alt="Treatments in Leeds" illustration="heroAbstract" />}
+        visual={<ImageFrame alt="Treatments in Leeds" illustration="heroAbstract" preferPhoto src={getAsset("hero", "gallery", 1)} />}
       />
 
       <Section>

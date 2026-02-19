@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import matter from "gray-matter";
+import { logRouteData } from "@/lib/route-log";
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog");
 
@@ -53,6 +54,7 @@ function normalizeFaqs(input: unknown): BlogFaqItem[] {
 
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
   const files = await fs.readdir(BLOG_DIR);
+  logRouteData("/blog", `found ${files.length} content files`);
 
   const posts = await Promise.all(
     files
@@ -90,10 +92,12 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
       })
   );
 
-  return posts.sort((a, b) => {
+  const sorted = posts.sort((a, b) => {
     if (a.date && b.date) return b.date.localeCompare(a.date);
     return a.title.localeCompare(b.title);
   });
+  logRouteData("/blog", `loaded ${sorted.length} posts`);
+  return sorted;
 }
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {

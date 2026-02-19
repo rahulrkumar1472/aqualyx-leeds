@@ -1,6 +1,7 @@
 import { buildMetadata } from "@/lib/seo";
 import { availabilityConfig } from "@/content/availability";
 import { siteConfig } from "@/content/site";
+import { getAsset } from "@/content/assets";
 import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { CTACluster } from "@/components/layout/CTACluster";
@@ -41,7 +42,7 @@ export default function LeedsLocationPage() {
           "WhatsApp-first support with call backup",
           "Book online and confirm your consultation slot"
         ]}
-        visual={<ImageFrame alt="Leeds clinic illustration" illustration="locationMap" />}
+        visual={<ImageFrame alt="Leeds clinic illustration" illustration="locationMap" preferPhoto src={getAsset("locations", "gallery", 1)} />}
       />
 
       <Section>

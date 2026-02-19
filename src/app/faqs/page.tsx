@@ -6,6 +6,7 @@ import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { WhatsAppPanel } from "@/components/site/whatsapp-panel";
 import { ImageFrame } from "@/components/media/ImageFrame";
+import { getAsset } from "@/content/assets";
 import { aqualyxFaqs, generalFaqs } from "@/content/faqs";
 import { buildMetadata, faqSchema } from "@/lib/seo";
 
@@ -52,7 +53,7 @@ export default function FaqPage() {
           "Consultation is required for final suitability",
           "Message us on WhatsApp for fast clarifications"
         ]}
-        visual={<ImageFrame alt="FAQ illustration" illustration="faq" />}
+        visual={<ImageFrame alt="FAQ illustration" illustration="faq" preferPhoto src={getAsset("clinic", "gallery", 1)} />}
       />
 
       <Section>

@@ -13,6 +13,7 @@ import { WhatsAppPanel } from "@/components/site/whatsapp-panel";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAsset } from "@/content/assets";
 
 export const metadata = buildMetadata({
   title: "Pricing in Leeds",
@@ -55,7 +56,7 @@ export default function PricingPage() {
           "Per-ml and package options explained clearly.",
           "Message us on WhatsApp for quick estimate support."
         ]}
-        visual={<ImageFrame alt="Pricing illustration" illustration="pricing" />}
+        visual={<ImageFrame alt="Pricing illustration" illustration="pricing" preferPhoto src={getAsset("pricing", "hero")} />}
       />
 
       <Section>

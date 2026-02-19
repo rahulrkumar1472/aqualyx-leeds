@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
 import { nearLeedsAreas } from "@/content/locations";
+import { aqualyxAreaPages } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { getAllBlogPosts } from "@/lib/blog";
+import { logRouteData } from "@/lib/route-log";
 
 const staticPaths = [
   "/",
@@ -14,7 +16,6 @@ const staticPaths = [
   "/aqualyx-side-effects",
   "/aqualyx-vs-lemon-bottle",
   "/aqualyx-vs-fat-freezing",
-  "/prices",
   "/treatments",
   "/treatments/fat-dissolving-injections",
   "/treatments/aqualyx",
@@ -24,9 +25,13 @@ const staticPaths = [
   "/treatments/ultrasound-cavitation",
   "/pricing",
   "/pricing/fat-dissolving",
+  "/pricing/aqualyx",
+  "/pricing/lemon-bottle",
   "/pricing/fat-freezing",
   "/pricing/cavitation",
+  "/pricing/ultrasound-cavitation",
   "/results",
+  "/case-studies",
   "/faqs",
   "/about",
   "/contact",
@@ -43,6 +48,7 @@ const staticPaths = [
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogPosts = await getAllBlogPosts();
+  logRouteData("/sitemap.xml", `rendering sitemap with ${blogPosts.length} blog posts`);
 
   const staticEntries = staticPaths.map((path) => ({
     url: `${siteConfig.siteUrl}${path}`,
@@ -58,6 +64,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7
   }));
 
+  const aqualyxAreaEntries = aqualyxAreaPages.map((area) => ({
+    url: `${siteConfig.siteUrl}/treatments/aqualyx/${area.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.7
+  }));
+
   const blogEntries = blogPosts.map((post) => ({
     url: `${siteConfig.siteUrl}/blog/${post.slug}`,
     lastModified: new Date(),
@@ -65,5 +78,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6
   }));
 
-  return [...staticEntries, ...locationEntries, ...blogEntries];
+  return [...staticEntries, ...locationEntries, ...aqualyxAreaEntries, ...blogEntries];
 }

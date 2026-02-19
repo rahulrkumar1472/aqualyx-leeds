@@ -1,4 +1,5 @@
 import { buildMetadata } from "@/lib/seo";
+import { getAsset } from "@/content/assets";
 import { siteConfig } from "@/content/site";
 import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
@@ -25,7 +26,7 @@ export default function PrivacyPage() {
           "We do not sell personal data to third parties.",
           "Contact us directly for privacy requests."
         ]}
-        visual={<ImageFrame alt="Privacy overview" illustration="faq" />}
+        visual={<ImageFrame alt="Privacy overview" illustration="faq" preferPhoto src={getAsset("clinic", "gallery", 0)} />}
       />
 
       <Section>

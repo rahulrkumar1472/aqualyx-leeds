@@ -10,12 +10,21 @@ import { FaqAccordion } from "@/components/sections/faq-accordion";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
+import { getAsset } from "@/content/assets";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { areaCoverage, type SeoLandingConfig } from "@/content/seo-pages";
 import { faqSchema, serviceSchema } from "@/lib/seo/schema";
 
 export function SeoLandingPage({ page }: { page: SeoLandingConfig }) {
+  const visualAsset =
+    page.illustration === "fatFreezing"
+      ? getAsset("treatments/fat-freezing", "hero")
+      : page.illustration === "cavitation"
+      ? getAsset("treatments/ultrasound-cavitation", "hero")
+      : page.illustration === "lemonBottle"
+      ? getAsset("treatments/lemon-bottle", "hero")
+      : getAsset("treatments/aqualyx", "hero");
   return (
     <>
       <Script
@@ -47,7 +56,7 @@ export function SeoLandingPage({ page }: { page: SeoLandingConfig }) {
           "Free consultation + suitability review.",
           "Clinically guided plan. No rushed decisions."
         ]}
-        visual={<ImageFrame alt={page.h1} className="min-h-[280px]" illustration={page.illustration} />}
+        visual={<ImageFrame alt={page.h1} className="min-h-[280px]" illustration={page.illustration} preferPhoto src={visualAsset} />}
       />
 
       <Section className="pt-0">

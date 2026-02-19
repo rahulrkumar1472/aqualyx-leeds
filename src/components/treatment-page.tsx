@@ -25,6 +25,7 @@ type TreatmentPageProps = {
   illustration?: "aqualyx" | "lemonBottle" | "fatFreezing" | "cavitation" | "clinic" | "generic";
   coverImage?: string;
   areas: readonly string[];
+  areaLinks?: Record<string, string>;
   suitability: readonly string[];
   steps: readonly string[];
   timeline: readonly string[];
@@ -41,6 +42,7 @@ export function TreatmentPageTemplate({
   illustration = "aqualyx",
   coverImage,
   areas,
+  areaLinks,
   suitability,
   steps,
   timeline,
@@ -188,7 +190,9 @@ export function TreatmentPageTemplate({
               <CardContent className="space-y-3 p-4 text-sm">
                 <p className="font-medium text-foreground">{area}</p>
                 <Button asChild size="sm" variant="outline">
-                  <Link href="/book">Book for this area</Link>
+                  <Link href={areaLinks?.[area] ?? "/book"}>
+                    {areaLinks?.[area] ? `Explore ${area}` : "Book for this area"}
+                  </Link>
                 </Button>
               </CardContent>
             </Card>

@@ -37,6 +37,13 @@ export default function AqualyxPage() {
   return (
     <TreatmentPageTemplate
       areas={treatment.areas}
+      areaLinks={{
+        "Double chin": "/treatments/aqualyx/double-chin",
+        "Love handles": "/treatments/aqualyx/love-handles",
+        "Lower stomach": "/treatments/aqualyx/lower-stomach",
+        Arms: "/treatments/aqualyx/arms",
+        "Back fat": "/treatments/aqualyx/back-fat"
+      }}
       illustration="aqualyx"
       coverImage={getAsset("treatments/aqualyx", "hero")}
       intro="Aqualyx Leeds provides a premium clinical pathway for targeted fat dissolving injections, including treatment planning, suitability checks and aftercare guidance."

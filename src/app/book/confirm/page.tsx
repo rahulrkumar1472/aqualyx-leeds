@@ -5,6 +5,7 @@ import { BookingConfirmTracker } from "@/components/booking/booking-confirm-trac
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAsset } from "@/content/assets";
 import { availabilityConfig } from "@/content/availability";
 import { siteConfig } from "@/content/site";
 import { buildMetadata } from "@/lib/seo";
@@ -50,7 +51,7 @@ export default function BookConfirmPage({
           "We will contact you within 24 working hours",
           "Keep your reference ready for quick support"
         ]}
-        visual={<ImageFrame alt="Booking confirmation" illustration="clinic" />}
+        visual={<ImageFrame alt="Booking confirmation" illustration="clinic" preferPhoto src={getAsset("clinic", "gallery", 2)} />}
       />
 
       <Section className="pt-0">

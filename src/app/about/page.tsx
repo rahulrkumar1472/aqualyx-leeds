@@ -8,6 +8,7 @@ import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAsset } from "@/content/assets";
 
 export const metadata = buildMetadata({
   title: "About Aqualyx Leeds",
@@ -27,7 +28,7 @@ export default function AboutPage() {
           "Transparent pricing and realistic expectations",
           "Leeds clinic support with WhatsApp-first communication"
         ]}
-        visual={<ImageFrame alt="Aqualyx clinic illustration" illustration="clinic" />}
+        visual={<ImageFrame alt="Aqualyx clinic illustration" illustration="clinic" preferPhoto src={getAsset("clinic", "hero")} />}
       />
 
       <Section>

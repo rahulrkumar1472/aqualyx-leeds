@@ -3,6 +3,7 @@ import { buildMetadata } from "@/lib/seo";
 import { availabilityConfig } from "@/content/availability";
 import { nearLeedsAreas } from "@/content/locations";
 import { siteConfig } from "@/content/site";
+import { getAsset } from "@/content/assets";
 import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
 import { SectionHeading } from "@/components/layout/SectionHeading";
@@ -39,7 +40,15 @@ export default function NearLeedsPage() {
           "Book online or message us on WhatsApp",
           "Consultation-led planning for each area"
         ]}
-        visual={<ImageFrame alt="Near Leeds coverage illustration" className="min-h-[260px]" illustration="locationMap" />}
+        visual={
+          <ImageFrame
+            alt="Near Leeds coverage illustration"
+            className="min-h-[260px]"
+            illustration="locationMap"
+            preferPhoto
+            src={getAsset("locations", "gallery", 2)}
+          />
+        }
       />
 
       <Section>

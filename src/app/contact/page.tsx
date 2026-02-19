@@ -10,6 +10,7 @@ import { ContactForm } from "@/components/forms/contact-form";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAsset } from "@/content/assets";
 
 export const metadata = buildMetadata({
   title: "Contact Aqualyx Leeds",
@@ -38,7 +39,7 @@ export default function ContactPage() {
           "Book your consultation online in minutes",
           "Leeds clinic support with transparent pricing"
         ]}
-        visual={<ImageFrame alt="Clinic illustration" illustration="locationMap" />}
+        visual={<ImageFrame alt="Clinic illustration" illustration="locationMap" preferPhoto src={getAsset("locations", "hero")} />}
       />
 
       <Section>

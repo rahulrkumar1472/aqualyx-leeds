@@ -23,9 +23,12 @@ const footerColumns = [
     links: [
       { title: "Prices Hub", href: "/prices" },
       { title: "Overview", href: "/pricing" },
+      { title: "Aqualyx Pricing", href: "/pricing/aqualyx" },
+      { title: "Lemon Bottle Pricing", href: "/pricing/lemon-bottle" },
       { title: "Fat Dissolving", href: "/pricing/fat-dissolving" },
       { title: "Fat Freezing", href: "/pricing/fat-freezing" },
-      { title: "Cavitation", href: "/pricing/cavitation" }
+      { title: "Cavitation", href: "/pricing/cavitation" },
+      { title: "Ultrasound Cavitation Pricing", href: "/pricing/ultrasound-cavitation" }
     ]
   },
   {
@@ -42,6 +45,7 @@ const footerColumns = [
     links: [
       { title: "About", href: "/about" },
       { title: "Results", href: "/results" },
+      { title: "Case Studies", href: "/case-studies" },
       { title: "FAQs", href: "/faqs" },
       { title: "Blog", href: "/blog" },
       { title: "Contact", href: "/contact" }

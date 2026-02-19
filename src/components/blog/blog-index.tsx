@@ -16,6 +16,7 @@ type BlogIndexItem = {
   readTime: string;
   date: string;
   category: string;
+  image?: string;
 };
 
 type BlogIndexProps = {
@@ -102,6 +103,8 @@ export function BlogIndex({ posts }: BlogIndexProps) {
                       ? "cavitation"
                       : "aqualyx"
                   }
+                  preferPhoto
+                  src={post.image}
                 />
                 <div className="flex items-center gap-2">
                   <Badge variant="outline">{post.category}</Badge>
@@ -144,6 +147,8 @@ export function BlogIndex({ posts }: BlogIndexProps) {
                     ? "cavitation"
                     : "aqualyx"
                 }
+                preferPhoto
+                src={post.image}
               />
               <div className="flex items-center gap-2">
                 <Badge variant="outline">{post.category}</Badge>

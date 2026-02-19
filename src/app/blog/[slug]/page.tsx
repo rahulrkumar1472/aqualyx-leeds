@@ -12,6 +12,7 @@ import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { assetAt, assets, getAsset } from "@/content/assets";
 import { articleSchema, buildMetadata, faqSchema } from "@/lib/seo";
 import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/blog";
 
@@ -60,6 +61,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   const [post, allPosts] = await Promise.all([getBlogPostBySlug(params.slug), getAllBlogPosts()]);
   if (!post) notFound();
   const relatedPosts = allPosts.filter((item) => item.slug !== post.slug).slice(0, 3);
+  const postIndex = allPosts.findIndex((item) => item.slug === post.slug);
+  const postImage = assetAt(assets.categories.blog?.gallery ?? [], postIndex < 0 ? 0 : postIndex, getAsset("blog", "hero"));
   const published = new Date(post.date).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
   const updated = new Date(post.updatedAt).toLocaleDateString("en-GB", {
     day: "numeric",
@@ -116,6 +119,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
                 ? "cavitation"
                 : "aqualyx"
             }
+            preferPhoto
+            src={postImage}
           />
         }
       />
@@ -321,6 +326,13 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
           {relatedPosts.map((related) => (
             <Card className="border-border/70 shadow-soft" key={related.slug}>
               <CardHeader className="space-y-2">
+                <ImageFrame
+                  alt={related.title}
+                  className="min-h-[160px]"
+                  illustration="blog"
+                  preferPhoto
+                  src={assetAt(assets.categories.blog?.gallery ?? [], allPosts.findIndex((p) => p.slug === related.slug), getAsset("blog", "hero"))}
+                />
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
                   {related.category}
                 </p>

@@ -1,4 +1,5 @@
 import { buildMetadata } from "@/lib/seo";
+import { getAsset } from "@/content/assets";
 import { siteConfig } from "@/content/site";
 import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
@@ -25,7 +26,7 @@ export default function TermsPage() {
           "Website content is informational, not a diagnosis.",
           "Use approved clinic channels for care decisions."
         ]}
-        visual={<ImageFrame alt="Terms overview" illustration="faq" />}
+        visual={<ImageFrame alt="Terms overview" illustration="faq" preferPhoto src={getAsset("clinic", "gallery", 1)} />}
       />
 
       <Section>

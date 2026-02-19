@@ -4,6 +4,7 @@ import { Section } from "@/components/layout/Section";
 import { InlineNotice } from "@/components/layout/InlineNotice";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { ImageFrame } from "@/components/media/ImageFrame";
+import { getAsset } from "@/content/assets";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
@@ -37,7 +38,7 @@ export default function BookPage({
           "WhatsApp-friendly follow-up after your request",
           "Secure your preferred date and time now"
         ]}
-        visual={<ImageFrame alt="Booking illustration" illustration="clinic" />}
+        visual={<ImageFrame alt="Booking illustration" illustration="clinic" preferPhoto src={getAsset("clinic", "hero")} />}
       />
 
       <Section className="pt-0">

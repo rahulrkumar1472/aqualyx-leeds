@@ -8,6 +8,7 @@ import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { ImageFrame } from "@/components/media/ImageFrame";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAsset } from "@/content/assets";
 
 export const metadata = buildMetadata({
   title: "Aqualyx Leeds Locations",
@@ -27,7 +28,7 @@ export default function LocationsHubPage() {
           "Directions, transport notes, and local booking routes",
           "WhatsApp-first support for quick local queries"
         ]}
-        visual={<ImageFrame alt="Leeds location illustration" illustration="locationMap" />}
+        visual={<ImageFrame alt="Leeds location illustration" illustration="locationMap" preferPhoto src={getAsset("locations", "hero")} />}
       />
 
       <Section>
