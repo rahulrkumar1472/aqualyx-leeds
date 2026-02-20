@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Premium clinic abstract">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d7efff" />
+      <stop offset="100%" stop-color="#f5fbff" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g1)" />
+  <circle cx="250" cy="190" r="180" fill="#8dd2ff" opacity=".35" />
+  <circle cx="940" cy="120" r="140" fill="#7fb6e8" opacity=".24" />
+  <circle cx="890" cy="620" r="220" fill="#6fa5d8" opacity=".2" />
+  <path d="M80 610C230 500 380 500 530 610C680 720 830 720 990 610" fill="none" stroke="#2f4e73" stroke-opacity=".28" stroke-width="14" stroke-linecap="round" />
+</svg>

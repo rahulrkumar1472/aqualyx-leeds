@@ -2,15 +2,20 @@ import Link from "next/link";
 import Script from "next/script";
 import { Award, CheckCircle2, Clock3, MapPin, ShieldCheck, Wallet } from "lucide-react";
 import { CTACluster } from "@/components/layout/CTACluster";
+import { FeatureGrid } from "@/components/layout/FeatureGrid";
 import { HeroShell } from "@/components/layout/HeroShell";
 import { InlineNotice } from "@/components/layout/InlineNotice";
+import { PageBreaker } from "@/components/layout/PageBreaker";
 import { Section } from "@/components/layout/Section";
+import { StatsBar } from "@/components/layout/StatsBar";
 import { SectionHeading } from "@/components/layout/SectionHeading";
 import { FaqAccordion } from "@/components/sections/faq-accordion";
 import { ReviewsSection } from "@/components/sections/reviews-section";
 import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
+import { TrustStack } from "@/components/site/trust-stack";
 import { ImageFrame } from "@/components/media/ImageFrame";
+import { QuickLeadForm } from "@/components/forms/quick-lead-form";
 import { ComparisonTable } from "@/components/ui/comparison-table";
 import { IconBadge } from "@/components/ui/icon-badge";
 import { Button } from "@/components/ui/button";
@@ -155,6 +160,24 @@ const whyChooseCards = [
   "Flexible booking flow with fast follow-up"
 ];
 
+const featureGridItems = [
+  {
+    title: "Consultation-led planning",
+    description: "Your route is based on suitability and treatment goals, not one-size-fits-all protocols.",
+    icon: ShieldCheck
+  },
+  {
+    title: "Transparent pricing",
+    description: "Per-ml and package pricing is shown clearly before booking and confirmed in person.",
+    icon: Wallet
+  },
+  {
+    title: "Leeds local clinic",
+    description: "Convenient LS11 location with WhatsApp-first communication and direct booking support.",
+    icon: MapPin
+  }
+];
+
 export default async function HomePage() {
   const posts = await getAllBlogPosts();
   const featuredPosts = posts.slice(0, 6);
@@ -199,6 +222,28 @@ export default async function HomePage() {
         </div>
       </Section>
 
+      <Section className="pt-0">
+        <StatsBar
+          items={[
+            { label: "Clinic", value: "Leeds (LS11)", icon: MapPin },
+            { label: "Pricing", value: "From £99 per ml", icon: Wallet },
+            { label: "Policy", value: "Price match available", icon: ShieldCheck },
+            { label: "Contact", value: "WhatsApp-first support", icon: Clock3 }
+          ]}
+        />
+      </Section>
+
+      <Section className="pt-0">
+        <SectionHeading
+          eyebrow="Trust"
+          subtext="Verified profile links are shown only when available. Ratings are sourced from linked review profiles."
+          title="Trust and authority"
+        />
+        <TrustStack />
+      </Section>
+
+      <PageBreaker />
+
       <Section>
         <SectionHeading
           actions={<CTACluster compact includeCall={false} />}
@@ -221,6 +266,10 @@ export default async function HomePage() {
             </Card>
           ))}
         </div>
+      </Section>
+
+      <Section className="pt-0">
+        <FeatureGrid items={featureGridItems} />
       </Section>
 
       <Section variant="muted">
@@ -253,6 +302,20 @@ export default async function HomePage() {
             Suitability, contraindications, and dosing are confirmed only after in-person clinical assessment.
           </InlineNotice>
         </div>
+      </Section>
+
+      <Section className="pt-0">
+        <Card className="border-primary/20 bg-[linear-gradient(140deg,hsl(var(--primary)/0.12),hsl(var(--background)))] shadow-soft">
+          <CardHeader>
+            <CardTitle className="text-xl">Quick lead request</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Share your area of concern and preferred contact method. We will follow up with next-step guidance.
+            </p>
+            <QuickLeadForm />
+          </CardContent>
+        </Card>
       </Section>
 
       <Section variant="muted">

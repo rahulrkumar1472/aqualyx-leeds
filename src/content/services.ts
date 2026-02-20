@@ -172,12 +172,12 @@ export const aqualyxAreaPages: AqualyxAreaContent[] = [
     slug: "lower-stomach",
     areaName: "Lower Stomach",
     intro:
-      "Aqualyx lower stomach plans are built after suitability checks and realistic response timeline discussion.",
+      "Aqualyx lower-stomach planning is built after suitability checks and realistic response timeline discussion.",
     whoFor: ["Clients with localised lower abdominal pockets", "Those seeking consultation-led non-surgical options"],
     whoNotFor: ["Clients needing medical weight-management pathways", "Unsuitable screening outcome"],
     mlRange: "Typical consultation discussion: 6-16 ml range guidance",
     timeline: [
-      { stage: "Consultation", detail: "Lower abdominal area assessed and plan discussed." },
+      { stage: "Consultation", detail: "Lower-stomach area assessed and plan discussed." },
       { stage: "Weeks 2-4", detail: "Response monitored with aftercare adherence." },
       { stage: "Weeks 4-8", detail: "Review checkpoint and next-step planning." }
     ],
@@ -189,6 +189,30 @@ export const aqualyxAreaPages: AqualyxAreaContent[] = [
       {
         question: "Why does dosage vary?",
         answer: "Area size and baseline profile affect final dosing recommendations."
+      }
+    ]
+  },
+  {
+    slug: "thighs",
+    areaName: "Thighs",
+    intro:
+      "Aqualyx thighs planning focuses on localised contour goals with staged review and clear expectations.",
+    whoFor: ["Clients with localised thigh-area concerns", "People seeking consultation-led non-surgical support"],
+    whoNotFor: ["Unsuitable screening profile", "Clients expecting guaranteed fast outcomes"],
+    mlRange: "Typical consultation discussion: 8-20 ml range guidance",
+    timeline: [
+      { stage: "Consultation", detail: "Thigh profile reviewed and suitable plan mapped." },
+      { stage: "Weeks 2-6", detail: "Gradual response may develop with aftercare adherence." },
+      { stage: "Weeks 6-10", detail: "Review confirms progress and next-step timing." }
+    ],
+    faqs: [
+      {
+        question: "Can both thighs be treated in one plan?",
+        answer: "Plans are individualised and based on your consultation findings."
+      },
+      {
+        question: "How quickly do changes show?",
+        answer: "Response is gradual and varies by person and treatment plan."
       }
     ]
   },

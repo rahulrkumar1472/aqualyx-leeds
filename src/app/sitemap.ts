@@ -30,6 +30,7 @@ const staticPaths = [
   "/pricing/fat-freezing",
   "/pricing/cavitation",
   "/pricing/ultrasound-cavitation",
+  "/pricing/price-match",
   "/results",
   "/case-studies",
   "/faqs",

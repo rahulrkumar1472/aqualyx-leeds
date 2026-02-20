@@ -11,6 +11,7 @@ import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { WhatsAppPanel } from "@/components/site/whatsapp-panel";
 import { ImageFrame } from "@/components/media/ImageFrame";
+import { QuickLeadForm } from "@/components/forms/quick-lead-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getAsset } from "@/content/assets";
@@ -39,6 +40,12 @@ const pricingPages = [
     href: "/pricing/cavitation",
     description: "Session package plans with flexible programme structures.",
     teaser: `From £${pricingConfig.cavitationPackages[0].priceGbp}`
+  },
+  {
+    title: "Price Match Policy",
+    href: "/pricing/price-match",
+    description: "Policy conditions and like-for-like comparison terms for Leeds clients.",
+    teaser: "Ask us to review a local quote"
   }
 ];
 
@@ -61,7 +68,7 @@ export default function PricingPage() {
 
       <Section>
         <SectionHeading title="Choose a pricing page" />
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {pricingPages.map((page) => (
             <Card className="border-border/70 shadow-soft" key={page.href}>
               <CardHeader>
@@ -77,6 +84,20 @@ export default function PricingPage() {
             </Card>
           ))}
         </div>
+      </Section>
+
+      <Section className="pt-0">
+        <Card className="border-primary/20 bg-[linear-gradient(140deg,hsl(var(--primary)/0.1),hsl(var(--background)))] shadow-soft">
+          <CardHeader>
+            <CardTitle className="text-xl">Get a quick quote callback</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Share your target area and preferred contact route. Our Leeds team can guide you before booking.
+            </p>
+            <QuickLeadForm />
+          </CardContent>
+        </Card>
       </Section>
 
       <Section className="pt-0">

@@ -41,6 +41,7 @@ export default function AqualyxPage() {
         "Double chin": "/treatments/aqualyx/double-chin",
         "Love handles": "/treatments/aqualyx/love-handles",
         "Lower stomach": "/treatments/aqualyx/lower-stomach",
+        Thighs: "/treatments/aqualyx/thighs",
         Arms: "/treatments/aqualyx/arms",
         "Back fat": "/treatments/aqualyx/back-fat"
       }}

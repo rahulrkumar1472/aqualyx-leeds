@@ -44,9 +44,9 @@ export function HeroShell({
       variant="gradient"
     >
       <div className="relative z-[1] grid gap-7 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-        <div className="space-y-5">
+        <div className="min-w-0 space-y-5">
           <p className="eyebrow">{eyebrow}</p>
-          <h1 className="max-w-4xl text-balance">{title}</h1>
+          <h1 className="max-w-4xl text-pretty">{title}</h1>
           <p className="lead text-[1.05rem]">{subline}</p>
           {priceTeaser ? <p className="text-sm font-semibold text-secondary">{priceTeaser}</p> : null}
           <div className="typewriter-pill">

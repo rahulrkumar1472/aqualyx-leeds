@@ -4,10 +4,23 @@ import { useEffect } from "react";
 
 export function RevealObserver() {
   useEffect(() => {
-    if (typeof IntersectionObserver === "undefined") return;
+    document.documentElement.classList.add("js-enabled");
 
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
     const elements = Array.from(document.querySelectorAll<HTMLElement>(".reveal-section"));
     if (!elements.length) return;
+
+    if (reduceMotion) {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    if (typeof IntersectionObserver === "undefined") {
+      elements.forEach((element) => element.classList.add("is-visible"));
+      return;
+    }
+
+    elements.forEach((element) => element.classList.add("is-ready"));
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -24,7 +37,15 @@ export function RevealObserver() {
     );
 
     elements.forEach((element) => observer.observe(element));
-    return () => observer.disconnect();
+
+    const failSafeTimer = window.setTimeout(() => {
+      elements.forEach((element) => element.classList.add("is-visible"));
+    }, 1400);
+
+    return () => {
+      window.clearTimeout(failSafeTimer);
+      observer.disconnect();
+    };
   }, []);
 
   return null;

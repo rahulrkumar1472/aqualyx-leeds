@@ -20,13 +20,14 @@ import { siteConfig } from "@/content/site";
 import { trackEvent } from "@/lib/track";
 
 const pricingLinks = [
-  { title: "Prices Hub", href: "/prices" },
+  { title: "Prices Hub", href: "/pricing" },
   { title: "Aqualyx Pricing", href: "/pricing/aqualyx" },
   { title: "Lemon Bottle Pricing", href: "/pricing/lemon-bottle" },
   { title: "Fat Dissolving (per ml)", href: "/pricing/fat-dissolving" },
   { title: "Fat Freezing Packages", href: "/pricing/fat-freezing" },
   { title: "Cavitation", href: "/pricing/cavitation" },
-  { title: "Ultrasound Cavitation Pricing", href: "/pricing/ultrasound-cavitation" }
+  { title: "Ultrasound Cavitation Pricing", href: "/pricing/ultrasound-cavitation" },
+  { title: "Price Match Policy", href: "/pricing/price-match" }
 ];
 
 const locationLinks = [

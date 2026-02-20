@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Body contour motif">
+  <defs>
+    <linearGradient id="g3" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#e8f6ff" />
+      <stop offset="100%" stop-color="#f9fdff" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g3)" />
+  <path d="M210 620C300 460 370 320 450 220" fill="none" stroke="#66afe4" stroke-opacity=".36" stroke-width="20" stroke-linecap="round" />
+  <path d="M360 640C450 480 520 340 600 230" fill="none" stroke="#2f4e73" stroke-opacity=".26" stroke-width="14" stroke-linecap="round" />
+  <path d="M760 610C840 490 920 360 1020 250" fill="none" stroke="#69b8ea" stroke-opacity=".34" stroke-width="18" stroke-linecap="round" />
+  <circle cx="1010" cy="120" r="92" fill="#89cdf7" opacity=".24" />
+</svg>

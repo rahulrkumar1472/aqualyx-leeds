@@ -3,6 +3,7 @@ const envPhone = process.env.NEXT_PUBLIC_PHONE?.trim();
 const envWhatsApp = process.env.NEXT_PUBLIC_WHATSAPP?.trim();
 const envAddress = process.env.NEXT_PUBLIC_CLINIC_ADDRESS?.trim();
 const envGbp = process.env.NEXT_PUBLIC_GBP_URL?.trim();
+const envTrustpilot = process.env.NEXT_PUBLIC_TRUSTPILOT_URL?.trim();
 
 const defaultPhoneDisplay = "0113 323 4896";
 const defaultPhoneHref = "tel:01133234896";
@@ -30,6 +31,13 @@ function formatWhatsAppDisplay(number: string) {
   return `+${number}`;
 }
 
+export type FeaturedOnItem = {
+  name: string;
+  url: string;
+  logoAssetPath?: string;
+  isVerified: boolean;
+};
+
 export const siteConfig = {
   name: "Aqualyx Leeds",
   domain: "aqualyxleeds.com",
@@ -53,11 +61,38 @@ export const siteConfig = {
     "Hi, I would like to find out more about Aqualyx in Leeds and book",
   whatsappUrl: envWhatsApp || defaultWhatsApp,
   googleBusinessUrl: envGbp || "https://share.google/gZYI1lIiRVhouJFF8",
+  trust: {
+    google: {
+      ratingValue: 4.9,
+      ratingCount: undefined as number | undefined,
+      profileUrl: envGbp || "https://share.google/gZYI1lIiRVhouJFF8",
+      badgeAssetPath: undefined as string | undefined
+    },
+    trustpilot: {
+      ratingValue: undefined as number | undefined,
+      reviewCount: undefined as number | undefined,
+      profileUrl: envTrustpilot || "",
+      badgeAssetPath: undefined as string | undefined
+    },
+    // Placeholder references stay non-public until verified and linked.
+    featuredOn: [] as FeaturedOnItem[],
+    valuePositioning: {
+      localClinic: "Local Leeds clinic (LS11)",
+      affordability: "We aim to be among the most affordable in Leeds — ask about price match.",
+      priceMatch: "Price match policy available",
+      priceMatchPath: "/pricing/price-match"
+    }
+  },
   reviewRating: "4.9★",
-  mostAffordableClaim: "Most affordable in Leeds",
-  priceMatchGuarantee: "Price-Match Guarantee",
-  localClinicClaim: "Local LS11 clinic",
-  trustBadges: ["Rated 4.9★ on Google", "Most affordable in Leeds", "Price-Match Guarantee", "Local LS11 clinic"],
+  mostAffordableClaim: "We aim to be among the most affordable in Leeds — ask about price match.",
+  priceMatchGuarantee: "Price match policy available",
+  localClinicClaim: "Local Leeds clinic (LS11)",
+  trustBadges: [
+    "Local Leeds clinic (LS11)",
+    "We aim to be among the most affordable in Leeds",
+    "Price match policy available",
+    "Consultation-led planning"
+  ],
   openingHoursDisplay: "Mon-Tue 09:30-18:30 • Wed-Thu 09:30-19:00 • Fri 09:30-17:30 • Sat 10:00-15:00 • Sun Closed",
   trustPillars: ["Transparent Pricing", "Leeds Clinic", "Free Consultation"],
   social: {

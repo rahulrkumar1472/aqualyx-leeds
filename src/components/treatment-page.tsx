@@ -12,6 +12,7 @@ import { CtaStrip } from "@/components/site/cta-strip";
 import { InternalLinksBlock } from "@/components/site/internal-links-block";
 import { WhatsAppPanel } from "@/components/site/whatsapp-panel";
 import { ImageFrame } from "@/components/media/ImageFrame";
+import { QuickLeadForm } from "@/components/forms/quick-lead-form";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { siteConfig } from "@/content/site";
@@ -355,6 +356,20 @@ export function TreatmentPageTemplate({
           </table>
         </div>
         {pricingSection}
+      </Section>
+
+      <Section className="pt-0">
+        <Card className="border-primary/20 bg-[linear-gradient(140deg,hsl(var(--primary)/0.12),hsl(var(--background)))] shadow-soft">
+          <CardHeader>
+            <CardTitle className="text-xl">Quick lead request</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Tell us your target area and preferred contact method. We can follow up with next-step guidance before you book.
+            </p>
+            <QuickLeadForm />
+          </CardContent>
+        </Card>
       </Section>
 
       <Section>

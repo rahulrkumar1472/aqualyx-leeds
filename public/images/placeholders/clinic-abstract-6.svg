@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Clean clinic placeholder">
+  <defs>
+    <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#eef8ff" />
+      <stop offset="100%" stop-color="#dff0fd" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g6)" />
+  <circle cx="130" cy="120" r="96" fill="#85c7f2" opacity=".26" />
+  <circle cx="1060" cy="170" r="130" fill="#79b4e4" opacity=".22" />
+  <circle cx="1000" cy="680" r="160" fill="#6ea6d5" opacity=".2" />
+  <path d="M170 640H1030" stroke="#2f4e73" stroke-opacity=".18" stroke-width="8" stroke-linecap="round" />
+  <path d="M220 580C340 520 470 520 590 580" fill="none" stroke="#5ba3d7" stroke-opacity=".34" stroke-width="12" stroke-linecap="round" />
+  <path d="M590 580C710 640 840 640 980 570" fill="none" stroke="#355a83" stroke-opacity=".24" stroke-width="10" stroke-linecap="round" />
+</svg>

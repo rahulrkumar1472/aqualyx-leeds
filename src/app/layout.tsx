@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import type { ReactNode } from "react";
+import { LayoutDebug } from "@/components/dev/layout-debug";
+import { StickyMobileCTA } from "@/components/layout/StickyMobileCTA";
 import { PageShell } from "@/components/layout/PageShell";
 import { Breadcrumbs } from "@/components/site/breadcrumbs";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
-import { MobileStickyCta } from "@/components/site/mobile-sticky-cta";
 import { OfferStrip } from "@/components/site/offer-strip";
 import { RevealObserver } from "@/components/site/reveal-observer";
 import { SitewideFinalCta } from "@/components/site/sitewide-final-cta";
@@ -53,6 +54,13 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
     <html lang="en">
       <body className="bg-noise-overlay font-sans">
         <Script
+          id="js-enabled-flag"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('js-enabled');"
+          }}
+        />
+        <Script
           id="local-business-schema"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema()) }}
@@ -66,8 +74,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <SitewideFinalCta />
         <Footer />
         <LeadPopup />
-        <MobileStickyCta />
+        <StickyMobileCTA />
         <WhatsAppFloat />
+        {process.env.NODE_ENV === "development" ? <LayoutDebug /> : null}
       </body>
     </html>
   );
