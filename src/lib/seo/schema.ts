@@ -1,4 +1,5 @@
 import { siteConfig } from "@/content/site";
+import { buildCanonicalUrl } from "@/lib/url";
 
 export type FaqItem = {
   question: string;
@@ -30,6 +31,7 @@ export function localBusinessSchema() {
 }
 
 export function serviceSchema(serviceName: string, path: string, description: string) {
+  const canonical = buildCanonicalUrl(path, siteConfig.siteUrl);
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -41,7 +43,7 @@ export function serviceSchema(serviceName: string, path: string, description: st
     },
     areaServed: "Leeds",
     description,
-    url: `${siteConfig.siteUrl}${path}`
+    url: canonical
   };
 }
 
@@ -66,7 +68,8 @@ export function articleSchema({
   path,
   datePublished,
   dateModified,
-  section
+  section,
+  image
 }: {
   headline: string;
   description: string;
@@ -74,10 +77,17 @@ export function articleSchema({
   datePublished: string;
   dateModified: string;
   section: string;
+  image?: string;
 }) {
+  const canonical = buildCanonicalUrl(path, siteConfig.siteUrl);
+  const imageUrl = image
+    ? image.startsWith("http")
+      ? image
+      : `${siteConfig.siteUrl}${image.startsWith("/") ? image : `/${image}`}`
+    : `${siteConfig.siteUrl}/brand/og.svg`;
   return {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline,
     description,
     articleSection: section,
@@ -96,7 +106,11 @@ export function articleSchema({
         url: `${siteConfig.siteUrl}/brand/logo.svg`
       }
     },
-    mainEntityOfPage: `${siteConfig.siteUrl}${path}`,
-    url: `${siteConfig.siteUrl}${path}`
+    image: imageUrl,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonical
+    },
+    url: canonical
   };
 }

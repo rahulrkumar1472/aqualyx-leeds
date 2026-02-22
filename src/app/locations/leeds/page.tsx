@@ -1,3 +1,4 @@
+import Script from "next/script";
 import { buildMetadata } from "@/lib/seo";
 import { availabilityConfig } from "@/content/availability";
 import { siteConfig } from "@/content/site";
@@ -29,8 +30,39 @@ export default function LeedsLocationPage() {
     { day: "Sunday", slots: availabilityConfig.openingHours.sunday }
   ];
 
+  const locationSchema = {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    name: siteConfig.name,
+    url: `${siteConfig.siteUrl}/locations/leeds`,
+    telephone: siteConfig.phoneDisplay,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: siteConfig.addressStructured.streetAddress,
+      addressLocality: siteConfig.addressStructured.addressLocality,
+      postalCode: siteConfig.addressStructured.postalCode,
+      addressCountry: siteConfig.addressStructured.addressCountry
+    },
+    areaServed: ["Leeds", "West Yorkshire"],
+    hasMap: siteConfig.mapQueryUrl,
+    sameAs: [siteConfig.googleBusinessUrl, siteConfig.whatsappUrl],
+    openingHoursSpecification: openingRows.flatMap((row) =>
+      row.slots.map((slot) => ({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: `https://schema.org/${row.day}`,
+        opens: slot.start,
+        closes: slot.end
+      }))
+    )
+  };
+
   return (
     <>
+      <Script
+        id="leeds-location-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(locationSchema) }}
+      />
       <HeroShell
         ctaCluster={<CTACluster compact />}
         eyebrow="Leeds Clinic"

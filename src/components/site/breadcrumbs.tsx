@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { Container } from "@/components/layout/Container";
 import { siteConfig } from "@/content/site";
+import { buildCanonicalUrl } from "@/lib/url";
 
 const labelOverrides: Record<string, string> = {
   treatments: "Treatments",
@@ -43,13 +44,13 @@ export function Breadcrumbs() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: siteConfig.siteUrl
+        item: buildCanonicalUrl("/", siteConfig.siteUrl)
       },
       ...segments.map((segment, index) => ({
         "@type": "ListItem",
         position: index + 2,
         name: formatSegment(segment),
-        item: `${siteConfig.siteUrl}/${segments.slice(0, index + 1).join("/")}`
+        item: buildCanonicalUrl(`/${segments.slice(0, index + 1).join("/")}`, siteConfig.siteUrl)
       }))
     ]
   };

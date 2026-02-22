@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/content/site";
 import { assets } from "@/content/assets";
+import { buildCanonicalUrl, normalizePathname } from "@/lib/url";
 import {
   articleSchema as buildArticleSchema,
   faqSchema as buildFaqSchema,
@@ -16,12 +17,17 @@ type MetadataArgs = {
 };
 
 export function buildMetadata({ title, description, path, keywords }: MetadataArgs): Metadata {
-  const canonical = `${siteConfig.siteUrl}${path}`;
+  const canonicalPath = normalizePathname(path);
+  const canonical = buildCanonicalUrl(canonicalPath, siteConfig.siteUrl);
 
   return {
     title,
     description,
     keywords,
+    robots: {
+      index: true,
+      follow: true
+    },
     alternates: {
       canonical
     },
@@ -69,6 +75,7 @@ export function articleSchema(args: {
   datePublished: string;
   dateModified: string;
   section: string;
+  image?: string;
 }) {
   return buildArticleSchema(args);
 }

@@ -46,13 +46,64 @@ export const metadata: Metadata = {
         alt: "Aqualyx Leeds"
       }
     ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aqualyx Leeds | Fat Dissolving Injections in Leeds",
+    description:
+      "Consultation-led fat dissolving injections and non-invasive body contouring options in Leeds.",
+    images: ["/brand/og.svg"]
   }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const gtmId = process.env.NEXT_PUBLIC_GTM_ID?.trim();
+  const ga4Id = process.env.NEXT_PUBLIC_GA4_ID?.trim();
+
   return (
     <html lang="en">
       <body className="bg-noise-overlay font-sans">
+        {gtmId ? (
+          <noscript>
+            <iframe
+              height="0"
+              src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+              style={{ display: "none", visibility: "hidden" }}
+              width="0"
+            />
+          </noscript>
+        ) : null}
+        {gtmId ? (
+          <Script
+            id="gtm-loader"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','${gtmId}');
+              `
+            }}
+          />
+        ) : null}
+        {ga4Id ? <Script src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`} strategy="afterInteractive" /> : null}
+        {ga4Id ? (
+          <Script
+            id="ga4-init"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
+                gtag('js', new Date());
+                gtag('config', '${ga4Id}', { send_page_view: true });
+              `
+            }}
+          />
+        ) : null}
         <Script
           id="js-enabled-flag"
           strategy="beforeInteractive"

@@ -4,6 +4,7 @@ import { aqualyxAreaPages } from "@/content/services";
 import { siteConfig } from "@/content/site";
 import { getAllBlogPosts } from "@/lib/blog";
 import { logRouteData } from "@/lib/route-log";
+import { buildCanonicalUrl } from "@/lib/url";
 
 const staticPaths = [
   "/",
@@ -52,28 +53,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   logRouteData("/sitemap.xml", `rendering sitemap with ${blogPosts.length} blog posts`);
 
   const staticEntries = staticPaths.map((path) => ({
-    url: `${siteConfig.siteUrl}${path}`,
+    url: buildCanonicalUrl(path, siteConfig.siteUrl),
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: path === "/" ? 1 : 0.7
   }));
 
   const locationEntries = nearLeedsAreas.map((area) => ({
-    url: `${siteConfig.siteUrl}/locations/areas/${area.slug}`,
+    url: buildCanonicalUrl(`/locations/areas/${area.slug}`, siteConfig.siteUrl),
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7
   }));
 
   const aqualyxAreaEntries = aqualyxAreaPages.map((area) => ({
-    url: `${siteConfig.siteUrl}/treatments/aqualyx/${area.slug}`,
+    url: buildCanonicalUrl(`/treatments/aqualyx/${area.slug}`, siteConfig.siteUrl),
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
     priority: 0.7
   }));
 
   const blogEntries = blogPosts.map((post) => ({
-    url: `${siteConfig.siteUrl}/blog/${post.slug}`,
+    url: buildCanonicalUrl(`/blog/${post.slug}`, siteConfig.siteUrl),
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.6

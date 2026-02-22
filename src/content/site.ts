@@ -1,3 +1,5 @@
+import { normalizeSiteUrl } from "@/lib/url";
+
 const envSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 const envPhone = process.env.NEXT_PUBLIC_PHONE?.trim();
 const envWhatsApp = process.env.NEXT_PUBLIC_WHATSAPP?.trim();
@@ -40,8 +42,8 @@ export type FeaturedOnItem = {
 
 export const siteConfig = {
   name: "Aqualyx Leeds",
-  domain: "aqualyxleeds.com",
-  siteUrl: envSiteUrl && /^https?:\/\//.test(envSiteUrl) ? envSiteUrl : "https://aqualyxleeds.com",
+  domain: "leedsfatdissolving.co.uk",
+  siteUrl: normalizeSiteUrl(envSiteUrl || "https://leedsfatdissolving.co.uk"),
   bookingPath: "/book",
   offerCopy: "Limited availability: claim 25% off + free personal coaching",
   address: envAddress || defaultAddress,

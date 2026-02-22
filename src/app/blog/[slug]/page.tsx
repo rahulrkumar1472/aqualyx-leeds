@@ -83,7 +83,8 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               path: `/blog/${post.slug}`,
               datePublished: post.date,
               dateModified: post.updatedAt,
-              section: post.category
+              section: post.category,
+              image: postImage
             })
           )
         }}
@@ -361,7 +362,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
               description: "Full treatment process, timeline, suitability, and FAQs."
             },
             {
-              href: "/prices",
+              href: "/pricing",
               label: "Pricing",
               description: "Transparent pricing overview with consultation quote notes."
             },

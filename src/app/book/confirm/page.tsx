@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Clock3, MapPin, PhoneCall } from "lucide-react";
 import { HeroShell } from "@/components/layout/HeroShell";
 import { Section } from "@/components/layout/Section";
@@ -10,11 +11,17 @@ import { availabilityConfig } from "@/content/availability";
 import { siteConfig } from "@/content/site";
 import { buildMetadata } from "@/lib/seo";
 
-export const metadata = buildMetadata({
-  title: "Booking Confirmation Leeds",
-  description: "Your Aqualyx Leeds consultation request has been received.",
-  path: "/book/confirm"
-});
+export const metadata: Metadata = {
+  ...buildMetadata({
+    title: "Booking Confirmation Leeds",
+    description: "Your Aqualyx Leeds consultation request has been received.",
+    path: "/book/confirm"
+  }),
+  robots: {
+    index: false,
+    follow: true
+  }
+};
 
 const weekdayOrder = [
   "monday",
